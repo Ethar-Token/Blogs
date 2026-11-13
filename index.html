@@ -1,0 +1,601 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jay | First Performance</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: #15151c;
+    color: white;
+    font-family: Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+header {
+    width: 100%;
+    padding: 20px;
+    text-align: center;
+    background: #20202a;
+    letter-spacing: 3px;
+    font-size: 13px;
+    color: #c9a9ff;
+}
+
+main {
+    width: 100%;
+    max-width: 850px;
+    padding: 25px 15px;
+}
+
+h1 {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 8px;
+}
+
+.description {
+    text-align: center;
+    color: #aaa;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.stage {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background:
+        radial-gradient(ellipse at 50% 35%, #555064, #282735 60%, #171720);
+    border-radius: 15px;
+    overflow: hidden;
+    border: 1px solid #44404e;
+}
+
+/* Background lighting */
+
+.light {
+    position: absolute;
+    width: 65%;
+    height: 100%;
+    left: 18%;
+    top: -30%;
+    background: #c6a9d9;
+    filter: blur(80px);
+    opacity: .17;
+}
+
+/* Character body */
+
+.character {
+    position: absolute;
+    width: 39%;
+    height: 95%;
+    bottom: -8%;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: idle 4s infinite ease-in-out;
+}
+
+.body {
+    position: absolute;
+    width: 100%;
+    height: 57%;
+    bottom: 0;
+    background: #252a36;
+    border-radius: 45% 45% 0 0;
+}
+
+.neck {
+    position: absolute;
+    width: 19%;
+    height: 25%;
+    top: -10%;
+    left: 40%;
+    background: #a66d53;
+    z-index: 2;
+}
+
+.shirt {
+    position: absolute;
+    width: 45%;
+    height: 100%;
+    left: 28%;
+    background: #ded4c7;
+    clip-path: polygon(20% 0,80% 0,100% 100%,0 100%);
+}
+
+.jacket {
+    position: absolute;
+    top: 0;
+    width: 43%;
+    height: 100%;
+    background: #252a36;
+    z-index: 2;
+}
+
+.jacket.left {
+    left: 0;
+    clip-path: polygon(65% 0,100% 0,78% 100%,0 100%);
+}
+
+.jacket.right {
+    right: 0;
+    clip-path: polygon(0 0,35% 0,100% 100%,22% 100%);
+}
+
+/* Character head */
+
+.head {
+    position: absolute;
+    width: 55%;
+    height: 57%;
+    left: 22.5%;
+    top: 3%;
+    z-index: 4;
+    transition: transform .4s;
+}
+
+.face {
+    position: absolute;
+    inset: 6% 4% 0;
+    background: linear-gradient(110deg,#965e48,#b87859,#8e5947);
+    border-radius: 46% 46% 44% 44%;
+    overflow: hidden;
+}
+
+.hair {
+    position: absolute;
+    top: -5%;
+    left: -3%;
+    width: 106%;
+    height: 29%;
+    background: #171519;
+    border-radius: 48% 48% 25% 25%;
+    clip-path: polygon(0 0,100% 0,100% 70%,84% 55%,74% 78%,62% 55%,49% 78%,34% 54%,20% 73%,0 65%);
+}
+
+.eyebrow {
+    position: absolute;
+    top: 38%;
+    width: 27%;
+    height: 5%;
+    background: #282027;
+    border-radius: 50%;
+    transition: .3s;
+}
+
+.eyebrow.left {
+    left: 16%;
+    transform: rotate(-7deg);
+}
+
+.eyebrow.right {
+    right: 16%;
+    transform: rotate(7deg);
+}
+
+.eye {
+    position: absolute;
+    top: 45%;
+    width: 22%;
+    height: 5%;
+    background: #f4e8da;
+    border-radius: 50%;
+}
+
+.eye.left {
+    left: 18%;
+}
+
+.eye.right {
+    right: 18%;
+}
+
+.eye::after {
+    content: "";
+    position: absolute;
+    width: 30%;
+    height: 100%;
+    left: 35%;
+    background: #211c20;
+    border-radius: 50%;
+}
+
+.nose {
+    position: absolute;
+    top: 46%;
+    left: 47%;
+    width: 7%;
+    height: 23%;
+    border-right: 2px solid rgba(60,30,25,.4);
+    border-bottom: 2px solid rgba(60,30,25,.3);
+    border-radius: 0 0 8px 0;
+}
+
+.mouth {
+    position: absolute;
+    top: 75%;
+    left: 39%;
+    width: 23%;
+    height: 4%;
+    background: #542d2e;
+    border-radius: 50%;
+    transition: height .12s;
+}
+
+.cheek {
+    position: absolute;
+    top: 62%;
+    width: 22%;
+    height: 7%;
+    background: #e28b7b;
+    opacity: .2;
+    filter: blur(5px);
+    border-radius: 50%;
+}
+
+.cheek.left {
+    left: 8%;
+}
+
+.cheek.right {
+    right: 8%;
+}
+
+/* Expressions */
+
+.character.talking .mouth {
+    height: 15%;
+    animation: mouthMove .18s infinite alternate;
+}
+
+.character.skeptical .eyebrow.left {
+    top: 33%;
+    transform: rotate(-18deg);
+}
+
+.character.skeptical .eyebrow.right {
+    transform: rotate(8deg);
+}
+
+.character.skeptical .head {
+    transform: rotate(-2deg);
+}
+
+.character.talking .head {
+    animation: talkingHead .7s infinite alternate;
+}
+
+/* Captions */
+
+.caption {
+    position: absolute;
+    z-index: 5;
+    bottom: 9%;
+    left: 5%;
+    right: 5%;
+    text-align: center;
+    font-size: clamp(14px, 2.5vw, 23px);
+    font-weight: bold;
+    text-shadow: 0 2px 8px black;
+    min-height: 30px;
+}
+
+/* Controls */
+
+.controls {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin: 22px 0;
+}
+
+button {
+    border: none;
+    padding: 13px 22px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    font-size: 13px;
+}
+
+.play {
+    background: #c9a9ff;
+    color: #21182d;
+}
+
+.stop {
+    background: #333340;
+    color: white;
+}
+
+button:hover {
+    opacity: .85;
+}
+
+.script {
+    background: #22222c;
+    border: 1px solid #393945;
+    border-radius: 12px;
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.script h2 {
+    font-size: 14px;
+    color: #c9a9ff;
+    letter-spacing: 2px;
+}
+
+.script p {
+    line-height: 1.8;
+    font-size: 16px;
+}
+
+footer {
+    color: #777;
+    font-size: 11px;
+    padding: 25px;
+    text-align: center;
+}
+
+@keyframes idle {
+    0%,100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(-4px); }
+}
+
+@keyframes mouthMove {
+    from { height: 5%; }
+    to { height: 17%; }
+}
+
+@keyframes talkingHead {
+    from { transform: translateY(0) rotate(-1deg); }
+    to { transform: translateY(-2px) rotate(1deg); }
+}
+
+@media(max-width:500px) {
+    .character {
+        width: 52%;
+    }
+
+    .caption {
+        bottom: 5%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>MY CHARACTER STUDIO</header>
+
+<main>
+
+<h1>For Real? 😂</h1>
+<p class="description">Character 01 · First performance</p>
+
+<div class="stage">
+
+    <div class="light"></div>
+
+    <div class="character" id="character">
+
+        <div class="body">
+            <div class="neck"></div>
+            <div class="shirt"></div>
+            <div class="jacket left"></div>
+            <div class="jacket right"></div>
+        </div>
+
+        <div class="head">
+
+            <div class="face">
+
+                <div class="hair"></div>
+
+                <div class="eyebrow left"></div>
+                <div class="eyebrow right"></div>
+
+                <div class="eye left"></div>
+                <div class="eye right"></div>
+
+                <div class="nose"></div>
+
+                <div class="cheek left"></div>
+                <div class="cheek right"></div>
+
+                <div class="mouth"></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="caption" id="caption">
+        For real...
+    </div>
+
+</div>
+
+<div class="controls">
+
+    <button class="play" onclick="playPerformance()">
+        ▶ PLAY PERFORMANCE
+    </button>
+
+    <button class="stop" onclick="stopPerformance()">
+        ■ STOP
+    </button>
+
+</div>
+
+<div class="script">
+
+    <h2>SCENE 01 · DIALOGUE</h2>
+
+    <p>
+        "For real... I need to understand why women shave
+        eyebrows just to draw them... are you guys okay?
+        Like for real?"
+    </p>
+
+</div>
+
+</main>
+
+<footer>
+    CHARACTER 01 · ORIGINAL PERFORMANCE
+</footer>
+
+<script>
+
+const character = document.getElementById("character");
+const caption = document.getElementById("caption");
+
+let playing = false;
+let runId = 0;
+
+const lines = [
+    {
+        text: "For real...",
+        pause: 900
+    },
+    {
+        text: "I need to understand why women shave eyebrows just to draw them...",
+        pause: 700
+    },
+    {
+        text: "Are you guys okay?",
+        pause: 800
+    },
+    {
+        text: "Like for real?",
+        pause: 500
+    }
+];
+
+function delay(ms, id) {
+    return new Promise(resolve => {
+        const start = Date.now();
+
+        function check() {
+            if (id !== runId) {
+                resolve(false);
+                return;
+            }
+
+            if (Date.now() - start >= ms) {
+                resolve(true);
+            } else {
+                setTimeout(check, 40);
+            }
+        }
+
+        check();
+    });
+}
+
+function speak(text, id) {
+
+    return new Promise(resolve => {
+
+        if (id !== runId) {
+            resolve(false);
+            return;
+        }
+
+        caption.textContent = text;
+
+        character.classList.add("talking");
+
+        if (!("speechSynthesis" in window)) {
+            delay(2200, id).then(() => {
+                character.classList.remove("talking");
+                resolve(id === runId);
+            });
+            return;
+        }
+
+        const voice = new SpeechSynthesisUtterance(text);
+
+        voice.rate = 0.92;
+        voice.pitch = 0.88;
+
+        voice.onend = () => {
+            character.classList.remove("talking");
+            resolve(id === runId);
+        };
+
+        voice.onerror = () => {
+            character.classList.remove("talking");
+            resolve(id === runId);
+        };
+
+        speechSynthesis.speak(voice);
+
+    });
+}
+
+async function playPerformance() {
+
+    stopPerformance();
+
+    const id = runId;
+
+    playing = true;
+
+    character.classList.add("skeptical");
+
+    for (const line of lines) {
+
+        if (id !== runId) return;
+
+        const completed = await speak(line.text, id);
+
+        if (!completed) return;
+
+        const paused = await delay(line.pause, id);
+
+        if (!paused) return;
+    }
+
+    if (id === runId) {
+        character.classList.remove("talking", "skeptical");
+        caption.textContent = "…";
+        playing = false;
+    }
+}
+
+function stopPerformance() {
+
+    runId++;
+
+    playing = false;
+
+    if ("speechSynthesis" in window) {
+        speechSynthesis.cancel();
+    }
+
+    character.classList.remove("talking", "skeptical");
+
+    caption.textContent = "For real...";
+}
+
+</script>
+
+</body>
+</html>
