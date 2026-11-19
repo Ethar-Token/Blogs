@@ -1,378 +1,439 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jay | First Performance</title>
+
+<title>We Said It — Wild Stories, Unfiltered Opinions & Real Conversations</title>
+
+<meta name="description" content="We Said It explores wild human behaviour, controversial opinions, relationships, gossip, internet culture and the things people don't always say out loud.">
+
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#7655c7">
+
+<link rel="canonical" href="https://YOUR-DOMAIN.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="We Said It — Some Things Just Need to Be Said">
+<meta property="og:description" content="Wild stories, unfiltered opinions, gossip and conversations about the things people do and say.">
+<meta property="og:url" content="https://blogs.ethartoken.com/">
+<meta property="og:site_name" content="We Said It">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="We Said It">
+<meta name="twitter:description" content="Some things just need to be said.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 
 <style>
+:root {
+    --primary: #7655c7;
+    --primary-light: #9b7bea;
+    --primary-pale: #f3efff;
+    --background: #faf9fd;
+    --surface: #ffffff;
+    --text: #29243a;
+    --muted: #777386;
+    --border: #eeeaf4;
+    --dark: #191622;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(35, 25, 60, .045);
+}
+
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
-    margin: 0;
-    background: #15151c;
-    color: white;
-    font-family: Arial, sans-serif;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
 }
 
-header {
-    width: 100%;
-    padding: 20px;
-    text-align: center;
-    background: #20202a;
-    letter-spacing: 3px;
-    font-size: 13px;
-    color: #c9a9ff;
-}
-
-main {
-    width: 100%;
-    max-width: 850px;
-    padding: 25px 15px;
-}
-
-h1 {
-    text-align: center;
-    font-size: 27px;
-    margin-bottom: 8px;
-}
-
-.description {
-    text-align: center;
-    color: #aaa;
-    font-size: 14px;
-    margin-bottom: 25px;
-}
-
-.stage {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background:
-        radial-gradient(ellipse at 50% 35%, #555064, #282735 60%, #171720);
-    border-radius: 15px;
-    overflow: hidden;
-    border: 1px solid #44404e;
-}
-
-/* Background lighting */
-
-.light {
-    position: absolute;
-    width: 65%;
-    height: 100%;
-    left: 18%;
-    top: -30%;
-    background: #c6a9d9;
-    filter: blur(80px);
-    opacity: .17;
-}
-
-/* Character body */
-
-.character {
-    position: absolute;
-    width: 39%;
-    height: 95%;
-    bottom: -8%;
-    left: 50%;
-    transform: translateX(-50%);
-    animation: idle 4s infinite ease-in-out;
-}
-
-.body {
-    position: absolute;
-    width: 100%;
-    height: 57%;
-    bottom: 0;
-    background: #252a36;
-    border-radius: 45% 45% 0 0;
-}
-
-.neck {
-    position: absolute;
-    width: 19%;
-    height: 25%;
-    top: -10%;
-    left: 40%;
-    background: #a66d53;
-    z-index: 2;
-}
-
-.shirt {
-    position: absolute;
-    width: 45%;
-    height: 100%;
-    left: 28%;
-    background: #ded4c7;
-    clip-path: polygon(20% 0,80% 0,100% 100%,0 100%);
-}
-
-.jacket {
-    position: absolute;
-    top: 0;
-    width: 43%;
-    height: 100%;
-    background: #252a36;
-    z-index: 2;
-}
-
-.jacket.left {
-    left: 0;
-    clip-path: polygon(65% 0,100% 0,78% 100%,0 100%);
-}
-
-.jacket.right {
-    right: 0;
-    clip-path: polygon(0 0,35% 0,100% 100%,22% 100%);
-}
-
-/* Character head */
-
-.head {
-    position: absolute;
-    width: 55%;
-    height: 57%;
-    left: 22.5%;
-    top: 3%;
-    z-index: 4;
-    transition: transform .4s;
-}
-
-.face {
-    position: absolute;
-    inset: 6% 4% 0;
-    background: linear-gradient(110deg,#965e48,#b87859,#8e5947);
-    border-radius: 46% 46% 44% 44%;
-    overflow: hidden;
-}
-
-.hair {
-    position: absolute;
-    top: -5%;
-    left: -3%;
-    width: 106%;
-    height: 29%;
-    background: #171519;
-    border-radius: 48% 48% 25% 25%;
-    clip-path: polygon(0 0,100% 0,100% 70%,84% 55%,74% 78%,62% 55%,49% 78%,34% 54%,20% 73%,0 65%);
-}
-
-.eyebrow {
-    position: absolute;
-    top: 38%;
-    width: 27%;
-    height: 5%;
-    background: #282027;
-    border-radius: 50%;
-    transition: .3s;
-}
-
-.eyebrow.left {
-    left: 16%;
-    transform: rotate(-7deg);
-}
-
-.eyebrow.right {
-    right: 16%;
-    transform: rotate(7deg);
-}
-
-.eye {
-    position: absolute;
-    top: 45%;
-    width: 22%;
-    height: 5%;
-    background: #f4e8da;
-    border-radius: 50%;
-}
-
-.eye.left {
-    left: 18%;
-}
-
-.eye.right {
-    right: 18%;
-}
-
-.eye::after {
-    content: "";
-    position: absolute;
-    width: 30%;
-    height: 100%;
-    left: 35%;
-    background: #211c20;
-    border-radius: 50%;
-}
-
-.nose {
-    position: absolute;
-    top: 46%;
-    left: 47%;
-    width: 7%;
-    height: 23%;
-    border-right: 2px solid rgba(60,30,25,.4);
-    border-bottom: 2px solid rgba(60,30,25,.3);
-    border-radius: 0 0 8px 0;
-}
-
-.mouth {
-    position: absolute;
-    top: 75%;
-    left: 39%;
-    width: 23%;
-    height: 4%;
-    background: #542d2e;
-    border-radius: 50%;
-    transition: height .12s;
-}
-
-.cheek {
-    position: absolute;
-    top: 62%;
-    width: 22%;
-    height: 7%;
-    background: #e28b7b;
-    opacity: .2;
-    filter: blur(5px);
-    border-radius: 50%;
-}
-
-.cheek.left {
-    left: 8%;
-}
-
-.cheek.right {
-    right: 8%;
-}
-
-/* Expressions */
-
-.character.talking .mouth {
-    height: 15%;
-    animation: mouthMove .18s infinite alternate;
-}
-
-.character.skeptical .eyebrow.left {
-    top: 33%;
-    transform: rotate(-18deg);
-}
-
-.character.skeptical .eyebrow.right {
-    transform: rotate(8deg);
-}
-
-.character.skeptical .head {
-    transform: rotate(-2deg);
-}
-
-.character.talking .head {
-    animation: talkingHead .7s infinite alternate;
-}
-
-/* Captions */
-
-.caption {
-    position: absolute;
-    z-index: 5;
-    bottom: 9%;
-    left: 5%;
-    right: 5%;
-    text-align: center;
-    font-size: clamp(14px, 2.5vw, 23px);
-    font-weight: bold;
-    text-shadow: 0 2px 8px black;
-    min-height: 30px;
-}
-
-/* Controls */
-
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 12px;
-    flex-wrap: wrap;
-    margin: 22px 0;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
 button {
-    border: none;
-    padding: 13px 22px;
-    border-radius: 8px;
-    font-weight: bold;
+    font: inherit;
     cursor: pointer;
+    border: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+/* TOP BAR */
+
+.topbar {
+    background: var(--dark);
+    color: #fff;
+    padding: 8px 5%;
+    font-size: 12px;
+}
+
+.topbar-inner {
+    max-width: 1250px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+}
+
+.topbar a {
+    color: #d6c9f6;
+}
+
+/* HEADER */
+
+.site-header {
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.header-inner {
+    max-width: 1250px;
+    margin: auto;
+    padding: 17px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 25px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 31px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+    white-space: nowrap;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.search-btn {
+    background: var(--primary-pale);
+    color: var(--primary);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    font-size: 15px;
+}
+
+.header-socials {
+    display: flex;
+    gap: 15px;
+    color: var(--muted);
+    font-size: 15px;
+}
+
+.header-socials a:hover {
+    color: var(--primary);
+}
+
+/* NAVIGATION */
+
+.main-nav {
+    border-top: 1px solid var(--border);
+}
+
+.nav-inner {
+    max-width: 1250px;
+    margin: auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-inner a {
+    padding: 13px 0;
     font-size: 13px;
+    font-weight: 700;
+    white-space: nowrap;
+    color: var(--muted);
+    position: relative;
 }
 
-.play {
-    background: #c9a9ff;
-    color: #21182d;
+.nav-inner a:hover,
+.nav-inner a.active {
+    color: var(--primary);
 }
 
-.stop {
-    background: #333340;
-    color: white;
+.nav-inner a.active::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--primary);
+    border-radius: 5px 5px 0 0;
 }
 
-button:hover {
-    opacity: .85;
+/* PAGE CONTAINER */
+
+.container {
+    max-width: 1190px;
+    margin: auto;
+    padding: 30px 22px;
 }
 
-.script {
-    background: #22222c;
-    border: 1px solid #393945;
-    border-radius: 12px;
-    padding: 20px;
-    margin-top: 15px;
-}
+/* ADVERTISEMENT */
 
-.script h2 {
-    font-size: 14px;
-    color: #c9a9ff;
-    letter-spacing: 2px;
-}
-
-.script p {
-    line-height: 1.8;
-    font-size: 16px;
-}
-
-footer {
-    color: #777;
-    font-size: 11px;
-    padding: 25px;
+.ad-label {
+    font-size: 9px;
+    color: #aaa5b3;
     text-align: center;
+    letter-spacing: 1.5px;
+    margin-bottom: 5px;
+    text-transform: uppercase;
 }
 
-@keyframes idle {
-    0%,100% { transform: translateX(-50%) translateY(0); }
-    50% { transform: translateX(-50%) translateY(-4px); }
+.ad-banner {
+    width: 100%;
+    max-width: 970px;
+    min-height: 90px;
+    margin: 0 auto 32px;
+    background: #f1eff5;
+    border: 1px dashed #d9d3e3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #aaa5b3;
+    font-size: 12px;
+    border-radius: 5px;
 }
 
-@keyframes mouthMove {
-    from { height: 5%; }
-    to { height: 17%; }
+/* HERO SECTION */
+
+.hero {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 25px;
+    margin-bottom: 42px;
 }
 
-@keyframes talkingHead {
-    from { transform: translateY(0) rotate(-1deg); }
-    to { transform: translateY(-2px) rotate(1deg); }
+.hero-main {
+    background: var(--dark);
+    min-height: 350px;
+    border-radius: var(--radius);
+    padding: 35px;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    position: relative;
+    overflow: hidden;
 }
 
-@media(max-width:500px) {
-    .character {
-        width: 52%;
+.hero-main::before {
+    content: "WE SAID IT";
+    position: absolute;
+    top: 25px;
+    right: -15px;
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(45px, 8vw, 95px);
+    font-weight: 800;
+    color: rgba(255,255,255,.045);
+    transform: rotate(-8deg);
+    white-space: nowrap;
+}
+
+.hero-main > * {
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    color: #c6aaff;
+    text-transform: uppercase;
+    font-size: 11px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-bottom: 13px;
+}
+
+.hero-main h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 47px);
+    line-height: 1.15;
+    margin-bottom: 15px;
+    max-width: 600px;
+}
+
+.hero-main p {
+    color: #d0cbd9;
+    font-size: 14px;
+    max-width: 520px;
+    margin-bottom: 23px;
+}
+
+.hero-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    background: var(--primary);
+    color: white;
+    padding: 12px 20px;
+    border-radius: 7px;
+    font-size: 12px;
+    font-weight: 800;
+    width: fit-content;
+    transition: .2s;
+}
+
+.hero-btn:hover {
+    background: var(--primary-light);
+    transform: translateY(-2px);
+}
+
+.hero-side {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.hero-small {
+    flex: 1;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 23px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    transition: .2s;
+}
+
+.hero-small:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+}
+
+.hero-small .small-icon {
+    color: var(--primary);
+    font-size: 20px;
+    margin-bottom: 12px;
+}
+
+.hero-small h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    margin-bottom: 7px;
+}
+
+.hero-small p {
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* SECTION HEADINGS */
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.section-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px;
+}
+
+.section-heading a {
+    color: var(--primary);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+    .topbar {
+        padding: 7px 15px;
     }
 
-    .caption {
-        bottom: 5%;
+    .header-inner {
+        padding: 13px 16px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .header-socials {
+        display: none;
+    }
+
+    .nav-inner {
+        padding: 0 16px;
+        gap: 23px;
+    }
+
+    .container {
+        padding: 22px 15px;
+    }
+
+    .ad-banner {
+        min-height: 60px;
+        margin-bottom: 25px;
+    }
+
+    .hero {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-main {
+        min-height: 320px;
+        padding: 25px;
+    }
+
+    .hero-side {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .hero-small {
+        padding: 17px;
+    }
+
+    .hero-small h3 {
+        font-size: 17px;
     }
 }
 </style>
@@ -380,44 +441,1312 @@ footer {
 
 <body>
 
-<header>MY CHARACTER STUDIO</header>
+<div class="topbar">
+    <div class="topbar-inner">
+        <span>Some things just need to be said.</span>
+        <a href="#latest">Explore the latest stories <i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
 
-<main>
+<header class="site-header">
 
-<h1>For Real? 😂</h1>
-<p class="description">Character 01 · First performance</p>
+    <div class="header-inner">
 
-<div class="stage">
+        <a href="/" class="logo">
+            WE SAID<span> IT.</span>
+        </a>
 
-    <div class="light"></div>
+        <div class="header-right">
 
-    <div class="character" id="character">
+            <div class="header-socials">
+                <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
+            </div>
 
-        <div class="body">
-            <div class="neck"></div>
-            <div class="shirt"></div>
-            <div class="jacket left"></div>
-            <div class="jacket right"></div>
+            <button class="search-btn" aria-label="Search">
+                <i class="fas fa-search"></i>
+            </button>
+
         </div>
 
-        <div class="head">
+    </div>
 
-            <div class="face">
+    <nav class="main-nav">
+        <div class="nav-inner">
 
-                <div class="hair"></div>
+            <a href="/" class="active">Home</a>
+            <a href="/category/wild-things/">Wild Things</a>
+            <a href="/category/lets-talk/">Let's Talk</a>
+            <a href="/category/relationships/">Relationships</a>
+            <a href="/category/gossip/">The Gossip</a>
+            <a href="/category/human-behaviour/">Human Behaviour</a>
+            <a href="/category/internet-culture/">Internet Culture</a>
+            <a href="/category/anonymous-stories/">Anonymous Stories</a>
 
-                <div class="eyebrow left"></div>
-                <div class="eyebrow right"></div>
+        </div>
+    </nav>
 
-                <div class="eye left"></div>
-                <div class="eye right"></div>
+</header>
 
-                <div class="nose"></div>
+<main class="container">
 
-                <div class="cheek left"></div>
-                <div class="cheek right"></div>
+    <!-- TOP ADVERTISEMENT -->
+    <div class="ad-label">Advertisement</div>
+    <div class="ad-banner">
+        <span>Advertisement Space — 970 × 90</span>
+    </div>
 
-                <div class="mouth"></div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+
+        <div class="hero-main">
+
+            <span class="eyebrow">WELCOME TO WE SAID IT</span>
+
+            <h1>Some Things Are Too Wild Not To Talk About.</h1>
+
+            <p>
+                From unbelievable human behaviour and relationship drama
+                to unpopular opinions, internet gossip and thoughts that
+                need to be heard. We're talking about it all.
+            </p>
+
+            <a href="#latest" class="hero-btn">
+                EXPLORE THE STORIES
+                <i class="fas fa-arrow-right"></i>
+            </a>
+
+        </div>
+
+
+        <div class="hero-side">
+
+            <a href="/category/wild-things/" class="hero-small">
+
+                <i class="fas fa-fire small-icon"></i>
+
+                <h3>Wild Things</h3>
+
+                <p>
+                    Some people really wake up and choose chaos.
+                    Explore the unbelievable.
+                </p>
+
+            </a>
+
+
+            <a href="/category/lets-talk/" class="hero-small">
+
+                <i class="fas fa-comments small-icon"></i>
+
+                <h3>Let's Talk</h3>
+
+                <p>
+                    Unpopular opinions, uncomfortable truths
+                    and conversations worth having.
+                </p>
+
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- TRENDING TOPICS -->
+    <section class="trending-section">
+
+        <div class="trending-header">
+            <h2>
+                <i class="fas fa-bolt"></i>
+                What's Trending
+            </h2>
+
+            <span>THE CONVERSATIONS</span>
+        </div>
+
+
+        <div class="trending-topics">
+
+            <a href="/tag/relationships/" class="trending-topic">
+                <span>#</span> Relationships
+            </a>
+
+            <a href="/tag/human-behaviour/" class="trending-topic">
+                <span>#</span> Human Behaviour
+            </a>
+
+            <a href="/tag/cheating/" class="trending-topic">
+                <span>#</span> Cheating
+            </a>
+
+            <a href="/tag/unpopular-opinions/" class="trending-topic">
+                <span>#</span> Unpopular Opinions
+            </a>
+
+            <a href="/tag/internet-drama/" class="trending-topic">
+                <span>#</span> Internet Drama
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- MAIN CONTENT LAYOUT -->
+    <div class="content-layout">
+
+
+        <!-- LEFT: ARTICLES -->
+        <div class="main-content">
+
+
+            <!-- LATEST STORIES -->
+            <section id="latest" class="article-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">FRESH OFF THE PRESS</span>
+                        <h2>Latest Stories</h2>
+                    </div>
+
+                    <a href="/articles/">
+                        VIEW ALL <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <!-- ARTICLE GRID -->
+                <div class="article-grid">
+
+
+                    <!-- SAMPLE ARTICLE 1 -->
+                    <article class="article-card">
+
+                        <a href="/relationships/why-people-stay-in-unhappy-relationships/">
+
+                            <div class="article-image-placeholder purple">
+                                <i class="fas fa-heart-crack"></i>
+                            </div>
+
+                        </a>
+
+                        <div class="article-info">
+
+                            <span class="article-category">
+                                RELATIONSHIPS
+                            </span>
+
+                            <h3>
+                                <a href="/relationships/why-people-stay-in-unhappy-relationships/">
+                                    Why Do People Stay in Relationships They Know Are Making Them Miserable?
+                                </a>
+                            </h3>
+
+                            <p>
+                                Sometimes leaving seems easier than staying.
+                                So why do so many people remain in relationships
+                                that no longer make them happy?
+                            </p>
+
+                            <div class="article-meta">
+                                <span><i class="far fa-calendar"></i> Coming soon</span>
+                                <span><i class="far fa-clock"></i> 5 min read</span>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SAMPLE ARTICLE 2 -->
+                    <article class="article-card">
+
+                        <a href="/wild-things/things-people-do-in-secret/">
+
+                            <div class="article-image-placeholder pink">
+                                <i class="fas fa-eye-slash"></i>
+                            </div>
+
+                        </a>
+
+                        <div class="article-info">
+
+                            <span class="article-category">
+                                WILD THINGS
+                            </span>
+
+                            <h3>
+                                <a href="/wild-things/things-people-do-in-secret/">
+                                    Some Things People Do in Secret Are Actually Insane
+                                </a>
+                            </h3>
+
+                            <p>
+                                You think you know someone until you discover
+                                the things they do when nobody is watching.
+                            </p>
+
+                            <div class="article-meta">
+                                <span><i class="far fa-calendar"></i> Coming soon</span>
+                                <span><i class="far fa-clock"></i> 4 min read</span>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SAMPLE ARTICLE 3 -->
+                    <article class="article-card">
+
+                        <a href="/lets-talk/things-we-normalized-that-shouldnt-be-normal/">
+
+                            <div class="article-image-placeholder orange">
+                                <i class="fas fa-brain"></i>
+                            </div>
+
+                        </a>
+
+                        <div class="article-info">
+
+                            <span class="article-category">
+                                LET'S TALK
+                            </span>
+
+                            <h3>
+                                <a href="/lets-talk/things-we-normalized-that-shouldnt-be-normal/">
+                                    Things Society Has Normalized That Should Never Have Been Normal
+                                </a>
+                            </h3>
+
+                            <p>
+                                Just because everyone does something
+                                doesn't automatically make it right.
+                            </p>
+
+                            <div class="article-meta">
+                                <span><i class="far fa-calendar"></i> Coming soon</span>
+                                <span><i class="far fa-clock"></i> 6 min read</span>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                    <!-- SAMPLE ARTICLE 4 -->
+                    <article class="article-card">
+
+                        <a href="/gossip/things-that-happen-behind-closed-doors/">
+
+                            <div class="article-image-placeholder blue">
+                                <i class="fas fa-comment-dots"></i>
+                            </div>
+
+                        </a>
+
+                        <div class="article-info">
+
+                            <span class="article-category">
+                                THE GOSSIP
+                            </span>
+
+                            <h3>
+                                <a href="/gossip/things-that-happen-behind-closed-doors/">
+                                    The Things That Happen Behind Closed Doors Will Surprise You
+                                </a>
+                            </h3>
+
+                            <p>
+                                Every family, friendship and relationship
+                                has a side the outside world rarely sees.
+                            </p>
+
+                            <div class="article-meta">
+                                <span><i class="far fa-calendar"></i> Coming soon</span>
+                                <span><i class="far fa-clock"></i> 5 min read</span>
+                            </div>
+
+                        </div>
+
+                    </article>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- IN-ARTICLE FEED AD -->
+            <div class="feed-ad">
+
+                <div class="ad-label">Advertisement</div>
+
+                <div class="ad-banner">
+                    Advertisement Space
+                </div>
+
+            </div>
+
+
+            <!-- POPULAR STORIES -->
+            <section class="article-section">
+
+                <div class="section-heading">
+
+                    <div>
+                        <span class="section-label">WORTH YOUR TIME</span>
+                        <h2>Popular Conversations</h2>
+                    </div>
+
+                    <a href="/articles/">
+                        EXPLORE MORE <i class="fas fa-arrow-right"></i>
+                    </a>
+
+                </div>
+
+
+                <div class="popular-list">
+
+
+                    <a href="/category/human-behaviour/" class="popular-item">
+
+                        <span class="popular-number">01</span>
+
+                        <div>
+                            <span class="article-category">HUMAN BEHAVIOUR</span>
+                            <h3>Why Do Some People Enjoy Making Others Feel Small?</h3>
+                            <p>Understanding behaviour that leaves people questioning themselves.</p>
+                        </div>
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a href="/category/relationships/" class="popular-item">
+
+                        <span class="popular-number">02</span>
+
+                        <div>
+                            <span class="article-category">RELATIONSHIPS</span>
+                            <h3>Is It Ever Okay to Check Your Partner's Phone?</h3>
+                            <p>Privacy, trust and the never-ending relationship debate.</p>
+                        </div>
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+
+                    <a href="/category/lets-talk/" class="popular-item">
+
+                        <span class="popular-number">03</span>
+
+                        <div>
+                            <span class="article-category">LET'S TALK</span>
+                            <h3>Unpopular Opinions People Are Too Afraid to Say Out Loud</h3>
+                            <p>Some thoughts will definitely get people talking.</p>
+                        </div>
+
+                        <i class="fas fa-arrow-right"></i>
+
+                    </a>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- BOTTOM FEED AD -->
+            <div class="ad-label">Advertisement</div>
+
+            <div class="ad-banner">
+                Advertisement Space
+            </div>
+
+
+        </div>
+
+
+        <!-- RIGHT SIDEBAR -->
+        <aside class="sidebar">
+
+
+            <!-- SIDEBAR AD -->
+            <div class="sidebar-ad">
+
+                <div class="ad-label">Advertisement</div>
+
+                <div class="sidebar-ad-box">
+                    300 × 250 AD SPACE
+                </div>
+
+            </div>
+
+
+            <!-- ABOUT WSI -->
+            <section class="sidebar-widget about-widget">
+
+                <span class="sidebar-heading">A LITTLE ABOUT US</span>
+
+                <h3>We Said It.</h3>
+
+                <p>
+                    The internet is full of things worth talking about.
+                    We're here for the wild stories, unexpected opinions,
+                    interesting conversations and everything in between.
+                </p>
+
+                <a href="/about/" class="sidebar-link">
+                    MORE ABOUT US
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+
+            </section>
+
+
+            <!-- EXPLORE CATEGORIES -->
+            <section class="sidebar-widget">
+
+                <span class="sidebar-heading">EXPLORE TOPICS</span>
+
+                <div class="category-list">
+
+                    <a href="/category/wild-things/">
+                        <span><i class="fas fa-fire"></i> Wild Things</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+
+                    <a href="/category/lets-talk/">
+                        <span><i class="fas fa-comments"></i> Let's Talk</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+
+                    <a href="/category/relationships/">
+                        <span><i class="fas fa-heart"></i> Relationships</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+
+                    <a href="/category/gossip/">
+                        <span><i class="fas fa-bullhorn"></i> The Gossip</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+
+                    <a href="/category/human-behaviour/">
+                        <span><i class="fas fa-brain"></i> Human Behaviour</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+
+                    <a href="/category/internet-culture/">
+                        <span><i class="fas fa-globe"></i> Internet Culture</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+
+                    <a href="/category/anonymous-stories/">
+                        <span><i class="fas fa-user-secret"></i> Anonymous Stories</span>
+                        <i class="fas fa-chevron-right"></i>
+                    </a>
+
+                </div>
+
+            </section>
+
+
+            <!-- TRENDING SIDEBAR -->
+            <section class="sidebar-widget">
+
+                <span class="sidebar-heading">TRENDING TOPICS</span>
+
+                <div class="sidebar-tags">
+
+                    <a href="/tag/relationships/">#Relationships</a>
+                    <a href="/tag/cheating/">#Cheating</a>
+                    <a href="/tag/gossip/">#Gossip</a>
+                    <a href="/tag/human-behaviour/">#HumanBehaviour</a>
+                    <a href="/tag/modern-dating/">#ModernDating</a>
+                    <a href="/tag/unpopular-opinions/">#UnpopularOpinions</a>
+                    <a href="/tag/secret-lives/">#SecretLives</a>
+                    <a href="/tag/internet-drama/">#InternetDrama</a>
+
+                </div>
+
+            </section>
+
+
+            <!-- NEWSLETTER -->
+            <section class="sidebar-widget newsletter-widget">
+
+                <i class="far fa-envelope newsletter-icon"></i>
+
+                <h3>Never Miss a Conversation.</h3>
+
+                <p>
+                    Interesting stories, wild opinions and things
+                    worth talking about.
+                </p>
+
+                <form id="newsletterForm">
+
+                    <input
+                        type="email"
+                        placeholder="Your email address"
+                        required
+                    >
+
+                    <button type="submit">
+                        KEEP ME UPDATED
+                    </button>
+
+                </form>
+
+                <small>Newsletter subscriptions coming soon.</small>
+
+            </section>
+
+
+            <!-- SIDEBAR AD -->
+            <div class="sidebar-ad">
+
+                <div class="ad-label">Advertisement</div>
+
+                <div class="sidebar-ad-box">
+                    300 × 250 AD SPACE
+                </div>
+
+            </div>
+
+
+        </aside>
+
+    </div>
+
+</main>
+
+<style>
+
+/* TRENDING SECTION */
+
+.trending-section {
+    margin-bottom: 40px;
+    padding: 20px 22px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+}
+
+.trending-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.trending-header h2 {
+    font-size: 15px;
+    font-weight: 800;
+}
+
+.trending-header h2 i {
+    color: var(--primary);
+    margin-right: 7px;
+}
+
+.trending-header > span {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.trending-topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 9px;
+}
+
+.trending-topic {
+    background: var(--primary-pale);
+    color: var(--primary);
+    padding: 8px 13px;
+    border-radius: 30px;
+    font-size: 11px;
+    font-weight: 700;
+    transition: .2s;
+}
+
+.trending-topic span {
+    font-weight: 800;
+}
+
+.trending-topic:hover {
+    background: var(--primary);
+    color: white;
+}
+
+
+/* MAIN CONTENT LAYOUT */
+
+.content-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 290px;
+    gap: 35px;
+    align-items: start;
+}
+
+.main-content {
+    min-width: 0;
+}
+
+.article-section {
+    margin-bottom: 42px;
+}
+
+.section-label {
+    display: block;
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    margin-bottom: 3px;
+}
+
+
+/* ARTICLE GRID */
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 24px 20px;
+}
+
+.article-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: .25s;
+}
+
+.article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.article-card > a {
+    display: block;
+}
+
+.article-image-placeholder {
+    height: 190px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 48px;
+    color: white;
+    overflow: hidden;
+}
+
+.purple {
+    background: linear-gradient(135deg, #7655c7, #b7a0ed);
+}
+
+.pink {
+    background: linear-gradient(135deg, #c75a91, #f0a4c9);
+}
+
+.orange {
+    background: linear-gradient(135deg, #d17c42, #f3bd7c);
+}
+
+.blue {
+    background: linear-gradient(135deg, #536cae, #9caee9);
+}
+
+.article-info {
+    padding: 18px;
+}
+
+.article-category {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 9px;
+}
+
+.article-info h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
+
+.article-info h3 a:hover {
+    color: var(--primary);
+}
+
+.article-info > p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.article-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.article-meta i {
+    margin-right: 4px;
+    color: var(--primary-light);
+}
+
+
+/* FEED AD */
+
+.feed-ad {
+    margin: 35px 0 42px;
+}
+
+
+/* POPULAR STORIES */
+
+.popular-list {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+.popular-item {
+    display: flex;
+    align-items: center;
+    gap: 17px;
+    padding: 19px;
+    border-bottom: 1px solid var(--border);
+    transition: .2s;
+}
+
+.popular-item:last-child {
+    border-bottom: none;
+}
+
+.popular-item:hover {
+    background: #fbf9ff;
+}
+
+.popular-number {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 800;
+    color: #ddd5ed;
+    min-width: 38px;
+}
+
+.popular-item > div {
+    flex: 1;
+}
+
+.popular-item h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    line-height: 1.35;
+    margin: 2px 0 6px;
+}
+
+.popular-item p {
+    font-size: 11px;
+    color: var(--muted);
+}
+
+.popular-item > i {
+    color: var(--primary);
+    font-size: 13px;
+}
+
+
+/* SIDEBAR */
+
+.sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.sidebar-widget {
+    background: white;
+    border: 1px solid var(--border);
+    padding: 22px;
+    border-radius: var(--radius);
+}
+
+.sidebar-heading {
+    display: block;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.5px;
+    color: var(--primary);
+    padding-bottom: 13px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 17px;
+}
+
+.about-widget h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 27px;
+    margin-bottom: 9px;
+}
+
+.about-widget p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.8;
+    margin-bottom: 16px;
+}
+
+.sidebar-link {
+    font-size: 10px;
+    color: var(--primary);
+    font-weight: 800;
+    letter-spacing: .5px;
+}
+
+.sidebar-link i {
+    margin-left: 5px;
+}
+
+
+/* SIDEBAR CATEGORIES */
+
+.category-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.category-list a {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.category-list a:last-child {
+    border-bottom: none;
+}
+
+.category-list a > span i {
+    color: var(--primary);
+    width: 23px;
+    margin-right: 5px;
+}
+
+.category-list a > i {
+    color: #b5afc1;
+    font-size: 10px;
+}
+
+.category-list a:hover {
+    color: var(--primary);
+    padding-left: 5px;
+}
+
+
+/* SIDEBAR TAGS */
+
+.sidebar-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.sidebar-tags a {
+    background: #f6f3fc;
+    color: #75658e;
+    padding: 7px 10px;
+    border-radius: 5px;
+    font-size: 10px;
+    font-weight: 600;
+    transition: .2s;
+}
+
+.sidebar-tags a:hover {
+    background: var(--primary);
+    color: white;
+}
+
+
+/* NEWSLETTER */
+
+.newsletter-widget {
+    background: #f3efff;
+    border-color: #e8ddff;
+    text-align: center;
+}
+
+.newsletter-icon {
+    font-size: 28px;
+    color: var(--primary);
+    margin-bottom: 13px;
+}
+
+.newsletter-widget h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 21px;
+    line-height: 1.3;
+    margin-bottom: 9px;
+}
+
+.newsletter-widget p {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 16px;
+}
+
+.newsletter-widget form {
+    display: flex;
+    flex-direction: column;
+    gap: 9px;
+}
+
+.newsletter-widget input {
+    width: 100%;
+    padding: 12px;
+    background: white;
+    border: 1px solid #e5dff0;
+    border-radius: 6px;
+    outline: none;
+    font: inherit;
+    font-size: 11px;
+}
+
+.newsletter-widget input:focus {
+    border-color: var(--primary);
+}
+
+.newsletter-widget button {
+    background: var(--primary);
+    color: white;
+    padding: 12px;
+    border-radius: 6px;
+    font-size: 10px;
+    font-weight: 800;
+    transition: .2s;
+}
+
+.newsletter-widget button:hover {
+    background: #6040ad;
+}
+
+.newsletter-widget small {
+    display: block;
+    margin-top: 11px;
+    font-size: 9px;
+    color: var(--muted);
+}
+
+
+/* SIDEBAR AD */
+
+.sidebar-ad-box {
+    min-height: 250px;
+    width: 100%;
+    background: #f1eff5;
+    border: 1px dashed #d9d3e3;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #aaa5b3;
+    font-size: 11px;
+}
+
+
+/* FOOTER */
+
+.site-footer {
+    background: var(--dark);
+    color: white;
+    margin-top: 55px;
+    padding: 55px 22px 20px;
+}
+
+.footer-inner {
+    max-width: 1190px;
+    margin: auto;
+}
+
+.footer-top {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr 1fr;
+    gap: 45px;
+    padding-bottom: 40px;
+}
+
+.footer-brand .logo {
+    display: inline-block;
+    margin-bottom: 15px;
+}
+
+.footer-brand p {
+    color: #aaa5b8;
+    font-size: 12px;
+    max-width: 340px;
+    line-height: 1.9;
+}
+
+.footer-column h4 {
+    font-size: 12px;
+    margin-bottom: 18px;
+    letter-spacing: 1px;
+}
+
+.footer-column a {
+    display: block;
+    color: #aaa5b8;
+    font-size: 12px;
+    margin-bottom: 12px;
+    transition: .2s;
+}
+
+.footer-column a:hover {
+    color: #c6aaff;
+}
+
+.footer-bottom {
+    border-top: 1px solid #373342;
+    padding-top: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.footer-bottom p {
+    color: #aaa5b8;
+    font-size: 10px;
+}
+
+.footer-socials {
+    display: flex;
+    gap: 17px;
+}
+
+.footer-socials a {
+    color: #aaa5b8;
+    font-size: 14px;
+}
+
+.footer-socials a:hover {
+    color: white;
+}
+
+
+/* MOBILE RESPONSIVENESS */
+
+@media (max-width: 950px) {
+
+    .content-layout {
+        grid-template-columns: minmax(0, 1fr) 250px;
+        gap: 22px;
+    }
+
+    .article-info h3 {
+        font-size: 17px;
+    }
+
+    .article-image-placeholder {
+        height: 165px;
+    }
+
+}
+
+@media (max-width: 760px) {
+
+    .content-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        align-items: start;
+    }
+
+    .sidebar-ad {
+        min-width: 0;
+    }
+
+    .sidebar-ad-box {
+        min-height: 180px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+
+    .footer-brand {
+        grid-column: 1 / -1;
+    }
+
+}
+
+@media (max-width: 480px) {
+
+    .article-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .article-image-placeholder {
+        height: 200px;
+    }
+
+    .sidebar {
+        grid-template-columns: 1fr;
+    }
+
+    .popular-item {
+        padding: 15px 12px;
+        gap: 10px;
+    }
+
+    .popular-number {
+        font-size: 25px;
+        min-width: 30px;
+    }
+
+    .popular-item h3 {
+        font-size: 15px;
+    }
+
+    .trending-section {
+        padding: 17px;
+    }
+
+    .trending-header {
+        align-items: flex-start;
+    }
+
+    .trending-header > span {
+        font-size: 8px;
+    }
+
+    .section-heading h2 {
+        font-size: 23px;
+    }
+
+    .footer-top {
+        grid-template-columns: 1fr 1fr;
+        gap: 25px 15px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+}
+
+</style>
+
+
+<!-- FOOTER -->
+
+<footer class="site-footer">
+
+    <div class="footer-inner">
+
+        <div class="footer-top">
+
+
+            <div class="footer-brand">
+
+                <a href="/" class="logo">
+                    WE SAID<span> IT.</span>
+                </a>
+
+                <p>
+                    Some things just need to be said. We explore the wild,
+                    the unusual, the controversial and everything in between.
+                    Stories, opinions, gossip and conversations worth having.
+                </p>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>EXPLORE</h4>
+
+                <a href="/">Home</a>
+                <a href="/articles/">All Stories</a>
+                <a href="/category/wild-things/">Wild Things</a>
+                <a href="/category/lets-talk/">Let's Talk</a>
+                <a href="/category/relationships/">Relationships</a>
+                <a href="/category/gossip/">The Gossip</a>
+
+            </div>
+
+
+            <div class="footer-column">
+
+                <h4>WE SAID IT</h4>
+
+                <a href="/about/">About Us</a>
+                <a href="/contact/">Contact</a>
+                <a href="/privacy/">Privacy Policy</a>
+                <a href="/terms/">Terms of Use</a>
+                <a href="/editorial-policy/">Editorial Policy</a>
+
+            </div>
+
+
+        </div>
+
+
+        <div class="footer-bottom">
+
+            <p>
+                © <span id="currentYear"></span> We Said It.
+                All rights reserved.
+            </p>
+
+
+            <div class="footer-socials">
+
+                <a href="#" aria-label="Facebook">
+                    <i class="fab fa-facebook-f"></i>
+                </a>
+
+                <a href="#" aria-label="Instagram">
+                    <i class="fab fa-instagram"></i>
+                </a>
+
+                <a href="#" aria-label="X">
+                    <i class="fab fa-x-twitter"></i>
+                </a>
 
             </div>
 
@@ -425,175 +1754,27 @@ footer {
 
     </div>
 
-    <div class="caption" id="caption">
-        For real...
-    </div>
-
-</div>
-
-<div class="controls">
-
-    <button class="play" onclick="playPerformance()">
-        ▶ PLAY PERFORMANCE
-    </button>
-
-    <button class="stop" onclick="stopPerformance()">
-        ■ STOP
-    </button>
-
-</div>
-
-<div class="script">
-
-    <h2>SCENE 01 · DIALOGUE</h2>
-
-    <p>
-        "For real... I need to understand why women shave
-        eyebrows just to draw them... are you guys okay?
-        Like for real?"
-    </p>
-
-</div>
-
-</main>
-
-<footer>
-    CHARACTER 01 · ORIGINAL PERFORMANCE
 </footer>
+
 
 <script>
 
-const character = document.getElementById("character");
-const caption = document.getElementById("caption");
+/* AUTOMATIC COPYRIGHT YEAR */
 
-let playing = false;
-let runId = 0;
+document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
 
-const lines = [
-    {
-        text: "For real...",
-        pause: 900
-    },
-    {
-        text: "I need to understand why women shave eyebrows just to draw them...",
-        pause: 700
-    },
-    {
-        text: "Are you guys okay?",
-        pause: 800
-    },
-    {
-        text: "Like for real?",
-        pause: 500
-    }
-];
 
-function delay(ms, id) {
-    return new Promise(resolve => {
-        const start = Date.now();
+/* NEWSLETTER PLACEHOLDER */
 
-        function check() {
-            if (id !== runId) {
-                resolve(false);
-                return;
-            }
+document.getElementById("newsletterForm").addEventListener("submit", function(e) {
 
-            if (Date.now() - start >= ms) {
-                resolve(true);
-            } else {
-                setTimeout(check, 40);
-            }
-        }
+    e.preventDefault();
 
-        check();
-    });
-}
+    alert("Newsletter subscriptions will be available soon!");
 
-function speak(text, id) {
+});
 
-    return new Promise(resolve => {
-
-        if (id !== runId) {
-            resolve(false);
-            return;
-        }
-
-        caption.textContent = text;
-
-        character.classList.add("talking");
-
-        if (!("speechSynthesis" in window)) {
-            delay(2200, id).then(() => {
-                character.classList.remove("talking");
-                resolve(id === runId);
-            });
-            return;
-        }
-
-        const voice = new SpeechSynthesisUtterance(text);
-
-        voice.rate = 0.92;
-        voice.pitch = 0.88;
-
-        voice.onend = () => {
-            character.classList.remove("talking");
-            resolve(id === runId);
-        };
-
-        voice.onerror = () => {
-            character.classList.remove("talking");
-            resolve(id === runId);
-        };
-
-        speechSynthesis.speak(voice);
-
-    });
-}
-
-async function playPerformance() {
-
-    stopPerformance();
-
-    const id = runId;
-
-    playing = true;
-
-    character.classList.add("skeptical");
-
-    for (const line of lines) {
-
-        if (id !== runId) return;
-
-        const completed = await speak(line.text, id);
-
-        if (!completed) return;
-
-        const paused = await delay(line.pause, id);
-
-        if (!paused) return;
-    }
-
-    if (id === runId) {
-        character.classList.remove("talking", "skeptical");
-        caption.textContent = "…";
-        playing = false;
-    }
-}
-
-function stopPerformance() {
-
-    runId++;
-
-    playing = false;
-
-    if ("speechSynthesis" in window) {
-        speechSynthesis.cancel();
-    }
-
-    character.classList.remove("talking", "skeptical");
-
-    caption.textContent = "For real...";
-}
 
 </script>
 
