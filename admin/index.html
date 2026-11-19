@@ -666,17 +666,13 @@ textarea {
                         <label for="category">Category <span class="required">*</span></label>
                         <select id="category" required>
                             <option value="">Select a category</option>
-                            <option>Relationships</option>
-                            <option>Confessions</option>
+                            <option>Wild Things</option>
+                            <option>Unfiltered Opinion</option>
                             <option>Internet Culture</option>
-                            <option>Entertainment</option>
+                            <option>Relationships</option>
                             <option>Human Behaviour</option>
-                            <option>Opinions</option>
-                            <option>Social Issues</option>
-                            <option>Family</option>
-                            <option>Work & Money</option>
-                            <option>Life & Society</option>
-                            <option>Uncategorized</option>
+                            <option>The Gossip</option>
+                            <option>Anonymous Stories</option>
                         </select>
                     </div>
 
@@ -749,7 +745,7 @@ textarea {
                 </div>
 
                 <div class="action-right">
-                    <button type="button" class="btn btn-primary" disabled title="Publishing will be enabled after we connect GitHub">
+                    <button type="button" class="btn btn-primary" id="publishBtn" onclick="publishArticle()">
                         Publish Article
                     </button>
                 </div>
@@ -780,6 +776,8 @@ textarea {
 </div>
 
 <script>
+const WORKER_URL = "https://wesaidit-publisher.etharcryptoproject.workers.dev/";
+
 const $ = id => document.getElementById(id);
 
 const titleInput = $("title");
@@ -846,9 +844,11 @@ function addLink() {
 
     try {
         const parsed = new URL(url);
+
         if (!["http:", "https:"].includes(parsed.protocol)) {
-            throw new Error("Invalid protocol");
+            throw new Error("Invalid URL");
         }
+
         contentEditor.focus();
         document.execCommand("createLink", false, parsed.href);
     } catch {
@@ -862,10 +862,12 @@ function getArticleData() {
         slug: slugInput.value.trim(),
         description: descriptionInput.value.trim(),
         category: $("category").value,
-        tags: $("tags").value.split(",").map(tag => tag.trim()).filter(Boolean),
+        tags: $("tags").value
+            .split(",")
+            .map(tag => tag.trim())
+            .filter(Boolean),
         image: $("image").value.trim(),
-        content: contentEditor.innerHTML,
-        updatedAt: new Date().toISOString()
+        content: contentEditor.innerHTML
     };
 }
 
@@ -879,10 +881,14 @@ function saveDraft() {
     }
 
     try {
-        localStorage.setItem("wesaidit_article_draft", JSON.stringify(data));
+        localStorage.setItem(
+            "wesaidit_article_draft",
+            JSON.stringify(data)
+        );
+
         markSaved();
         showToast("Draft saved in this browser.");
-    } catch (error) {
+    } catch {
         showToast("Could not save draft. Browser storage may be full.");
     }
 }
@@ -923,7 +929,8 @@ function showPreview() {
     $("previewTitle").textContent = data.title;
     $("previewDescription").textContent = data.description;
     $("previewCategory").textContent = data.category || "Article";
-    $("previewBody").innerHTML = data.content || "<p>Your article content will appear here.</p>";
+    $("previewBody").innerHTML = data.content ||
+        "<p>Your article content will appear here.</p>";
 
     if (data.image) {
         $("previewImage").src = data.image;
@@ -942,7 +949,9 @@ function closePreview() {
 }
 
 $("previewModal").addEventListener("click", event => {
-    if (event.target === $("previewModal")) closePreview();
+    if (event.target === $("previewModal")) {
+        closePreview();
+    }
 });
 
 function updateImagePreview() {
@@ -968,11 +977,80 @@ function showToast(message) {
 
     setTimeout(() => {
         toast.style.display = "none";
-    }, 3000);
+    }, 3500);
+}
+
+async function publishArticle() {
+    const data = getArticleData();
+
+    if (!data.title || !data.description || !data.category || !data.content.trim()) {
+        alert("Please complete the title, SEO description, category and article content.");
+        return;
+    }
+
+    if (!data.slug) {
+        alert("Please enter a valid article URL slug.");
+        return;
+    }
+
+    if (WORKER_URL.includes("PASTE_YOUR_WORKER_URL_HERE")) {
+        alert("First add your actual Cloudflare Worker URL in the JavaScript.");
+        return;
+    }
+
+    const adminKey = prompt("Enter your publishing password:");
+
+    if (!adminKey) return;
+
+    const button = $("publishBtn");
+    button.disabled = true;
+    button.textContent = "Publishing...";
+
+    try {
+        const response = await fetch(WORKER_URL, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": "Bearer " + adminKey
+            },
+            body: JSON.stringify(data)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+            throw new Error(result.error || "Publishing failed.");
+        }
+
+        markSaved();
+        showToast("Article published successfully!");
+
+        alert(
+            "Your article has been sent to GitHub!\n\n" +
+            "Article URL:\n" + result.url +
+            "\n\nGitHub Pages may take a short time to update."
+        );
+
+        localStorage.removeItem("wesaidit_article_draft");
+
+    } catch (error) {
+        console.error("Publishing error:", error);
+
+        alert(
+            "We couldn't publish your article.\n\n" +
+            error.message +
+            "\n\nCheck your Worker URL, Cloudflare secrets and GitHub permissions."
+        );
+
+    } finally {
+        button.disabled = false;
+        button.textContent = "Publish Article";
+    }
 }
 
 loadDraft();
 </script>
+
 
 </body>
 </html>
