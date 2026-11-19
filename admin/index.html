@@ -1,0 +1,978 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>We Said It — Admin Dashboard</title>
+<meta name="robots" content="noindex, nofollow">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<style>
+:root {
+    --purple: #7655c7;
+    --purple-dark: #6040ad;
+    --purple-light: #f2edfc;
+    --background: #f7f6fa;
+    --white: #ffffff;
+    --text: #29243a;
+    --muted: #827d90;
+    --border: #e9e6ef;
+    --green: #16845b;
+    --red: #c94b59;
+    --shadow: 0 5px 24px rgba(35, 25, 65, .05);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+}
+
+button, input, textarea, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+.topbar {
+    height: 72px;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    position: sticky;
+    top: 0;
+    z-index: 20;
+}
+
+.brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 25px;
+    font-weight: 800;
+    color: var(--text);
+}
+
+.brand span {
+    color: var(--purple);
+}
+
+.topbar-right {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    font-size: 13px;
+    color: var(--muted);
+}
+
+.admin-label {
+    background: var(--purple-light);
+    color: var(--purple);
+    padding: 7px 12px;
+    border-radius: 20px;
+    font-weight: 700;
+}
+
+.layout {
+    max-width: 1450px;
+    margin: auto;
+    padding: 35px 5%;
+    display: grid;
+    grid-template-columns: 220px minmax(0, 1fr);
+    gap: 30px;
+}
+
+.sidebar {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 20px 14px;
+    height: fit-content;
+    position: sticky;
+    top: 100px;
+}
+
+.sidebar-title {
+    color: var(--muted);
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.4px;
+    padding: 5px 12px 13px;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    color: #625d70;
+    font-size: 13px;
+    font-weight: 600;
+    border-radius: 9px;
+    margin-bottom: 5px;
+    text-decoration: none;
+}
+
+.nav-item.active {
+    background: var(--purple-light);
+    color: var(--purple);
+}
+
+.nav-item .symbol {
+    width: 20px;
+    text-align: center;
+    font-size: 16px;
+}
+
+.main {
+    min-width: 0;
+}
+
+.page-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.page-heading h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    margin: 0 0 7px;
+}
+
+.page-heading p {
+    margin: 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    background: #fff7e8;
+    color: #a56b13;
+    border-radius: 20px;
+    padding: 8px 12px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.status::before {
+    content: "";
+    width: 7px;
+    height: 7px;
+    background: currentColor;
+    border-radius: 50%;
+}
+
+.panel {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 22px;
+    box-shadow: var(--shadow);
+}
+
+.panel-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 22px;
+    gap: 10px;
+}
+
+.panel-heading h2 {
+    font-size: 16px;
+    margin: 0;
+    font-weight: 800;
+}
+
+.panel-heading p {
+    font-size: 11px;
+    color: var(--muted);
+    margin: 5px 0 0;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+label {
+    display: block;
+    font-size: 12px;
+    font-weight: 700;
+    margin-bottom: 8px;
+}
+
+.required {
+    color: var(--red);
+}
+
+input, textarea, select {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 12px 13px;
+    outline: none;
+    background: #fff;
+    color: var(--text);
+    font-size: 13px;
+    transition: .2s;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--purple);
+    box-shadow: 0 0 0 3px rgba(118, 85, 199, .09);
+}
+
+textarea {
+    resize: vertical;
+    min-height: 90px;
+    line-height: 1.7;
+}
+
+.help {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 7px;
+    line-height: 1.5;
+}
+
+.slug-wrap {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.slug-prefix {
+    background: #f8f7fa;
+    padding: 12px;
+    font-size: 12px;
+    color: var(--muted);
+    border-right: 1px solid var(--border);
+    white-space: nowrap;
+}
+
+.slug-wrap input {
+    border: 0;
+    border-radius: 0;
+    min-width: 0;
+}
+
+.two-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+
+.editor-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
+    padding: 9px;
+    border: 1px solid var(--border);
+    border-bottom: 0;
+    border-radius: 8px 8px 0 0;
+    background: #faf9fc;
+}
+
+.editor-toolbar button {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    min-width: 32px;
+    height: 30px;
+    color: var(--text);
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.editor-toolbar button:hover {
+    background: var(--purple-light);
+    color: var(--purple);
+}
+
+#articleContent {
+    min-height: 420px;
+    padding: 20px;
+    border-radius: 0 0 8px 8px;
+    line-height: 1.8;
+    font-size: 14px;
+    outline: none;
+    border: 1px solid var(--border);
+    overflow-wrap: anywhere;
+}
+
+#articleContent:empty::before {
+    content: "Start writing your article here...";
+    color: #aaa5b5;
+}
+
+#articleContent h2,
+#articleContent h3 {
+    font-family: 'Playfair Display', serif;
+    line-height: 1.3;
+}
+
+#articleContent p {
+    margin: 0 0 17px;
+}
+
+#articleContent blockquote {
+    border-left: 3px solid var(--purple);
+    padding: 10px 18px;
+    margin: 20px 0;
+    background: var(--purple-light);
+    border-radius: 0 8px 8px 0;
+}
+
+.image-preview {
+    display: none;
+    margin-top: 12px;
+    max-width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.action-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding: 18px 0 35px;
+}
+
+.action-left, .action-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 11px 17px;
+    font-size: 12px;
+    font-weight: 700;
+    background: white;
+    color: var(--text);
+}
+
+.btn:hover {
+    background: #f8f7fa;
+}
+
+.btn-primary {
+    background: var(--purple);
+    border-color: var(--purple);
+    color: white;
+}
+
+.btn-primary:hover {
+    background: var(--purple-dark);
+    color: white;
+}
+
+.btn-preview {
+    color: var(--purple);
+    border-color: #d9cdef;
+}
+
+.btn:disabled {
+    opacity: .5;
+    cursor: not-allowed;
+}
+
+.notice {
+    background: #fff8e9;
+    border: 1px solid #f2e2bd;
+    color: #80601e;
+    border-radius: 9px;
+    padding: 14px 16px;
+    font-size: 12px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.notice strong {
+    display: block;
+    margin-bottom: 3px;
+}
+
+.toast {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background: #28243a;
+    color: white;
+    padding: 14px 19px;
+    border-radius: 9px;
+    font-size: 13px;
+    box-shadow: 0 5px 25px #0002;
+    display: none;
+    z-index: 100;
+}
+
+.modal {
+    position: fixed;
+    inset: 0;
+    background: rgba(20, 15, 35, .65);
+    z-index: 50;
+    display: none;
+    overflow-y: auto;
+    padding: 30px 15px;
+}
+
+.modal-box {
+    max-width: 850px;
+    margin: auto;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 22px;
+    border-bottom: 1px solid var(--border);
+}
+
+.modal-header h3 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.close-modal {
+    border: 0;
+    background: none;
+    font-size: 25px;
+    color: var(--muted);
+}
+
+.preview-content {
+    padding: 35px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.preview-content h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 34px;
+    line-height: 1.2;
+}
+
+.preview-description {
+    color: var(--muted);
+    font-size: 16px;
+}
+
+.preview-image {
+    width: 100%;
+    max-height: 350px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin: 15px 0;
+}
+
+.preview-content img {
+    max-width: 100%;
+}
+
+@media(max-width: 850px) {
+    .layout {
+        grid-template-columns: 1fr;
+        padding: 22px 4%;
+    }
+
+    .sidebar {
+        position: static;
+        display: flex;
+        overflow-x: auto;
+        padding: 10px;
+        gap: 5px;
+    }
+
+    .sidebar-title {
+        display: none;
+    }
+
+    .nav-item {
+        white-space: nowrap;
+        margin: 0;
+    }
+
+    .topbar {
+        padding: 0 4%;
+    }
+}
+
+@media(max-width: 550px) {
+    .page-heading {
+        flex-direction: column;
+    }
+
+    .panel {
+        padding: 18px;
+    }
+
+    .two-columns {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .slug-prefix {
+        font-size: 10px;
+        padding: 12px 7px;
+    }
+
+    .action-bar {
+        align-items: stretch;
+    }
+
+    .action-left, .action-right {
+        width: 100%;
+    }
+
+    .action-bar .btn {
+        flex: 1;
+    }
+
+    .preview-content {
+        padding: 22px;
+    }
+
+    .preview-content h1 {
+        font-size: 27px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header class="topbar">
+    <div class="brand">We Said <span>It.</span></div>
+
+    <div class="topbar-right">
+        <span>Content Management</span>
+        <span class="admin-label">ADMIN</span>
+    </div>
+</header>
+
+<div class="layout">
+
+    <aside class="sidebar">
+        <div class="sidebar-title">WORKSPACE</div>
+
+        <a href="#" class="nav-item active">
+            <span class="symbol">✎</span> New Article
+        </a>
+
+        <a href="../index.html" class="nav-item">
+            <span class="symbol">⌂</span> View Website
+        </a>
+    </aside>
+
+    <main class="main">
+
+        <div class="page-heading">
+            <div>
+                <h1>Create an Article</h1>
+                <p>Write, edit and prepare your next story for We Said It.</p>
+            </div>
+
+            <span class="status" id="saveStatus">Unsaved changes</span>
+        </div>
+
+        <div class="notice">
+            <strong>Publishing is not connected yet.</strong>
+            You can write articles, preview them and save drafts in this browser. We'll connect publishing to GitHub through a secure Cloudflare Worker in the next step.
+        </div>
+
+        <form id="articleForm">
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Article Information</h2>
+                        <p>The basic details readers and search engines will see.</p>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="title">Article Title <span class="required">*</span></label>
+                    <input
+                        id="title"
+                        type="text"
+                        placeholder="e.g. Things People Secretly Think But Never Say"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="slug">Article URL</label>
+                    <div class="slug-wrap">
+                        <span class="slug-prefix">/Blogs/</span>
+                        <input
+                            id="slug"
+                            type="text"
+                            placeholder="things-people-secretly-think"
+                        >
+                    </div>
+                    <div class="help">This will become the article's permanent URL. Keep it short, descriptive and use hyphens.</div>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">SEO Description <span class="required">*</span></label>
+                    <textarea
+                        id="description"
+                        maxlength="160"
+                        placeholder="Write a compelling description of this article for Google search results..."
+                        required
+                    ></textarea>
+                    <div class="help"><span id="descriptionCount">0</span>/160 characters. Aim for around 140–160 characters.</div>
+                </div>
+
+                <div class="two-columns">
+                    <div class="form-group">
+                        <label for="category">Category <span class="required">*</span></label>
+                        <select id="category" required>
+                            <option value="">Select a category</option>
+                            <option>Relationships</option>
+                            <option>Confessions</option>
+                            <option>Internet Culture</option>
+                            <option>Entertainment</option>
+                            <option>Human Behaviour</option>
+                            <option>Opinions</option>
+                            <option>Social Issues</option>
+                            <option>Family</option>
+                            <option>Work & Money</option>
+                            <option>Life & Society</option>
+                            <option>Uncategorized</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="tags">Tags</label>
+                        <input
+                            id="tags"
+                            type="text"
+                            placeholder="relationships, secrets, opinions"
+                        >
+                        <div class="help">Separate tags with commas.</div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Featured Image URL</label>
+                    <input
+                        id="image"
+                        type="url"
+                        placeholder="https://example.com/image.jpg"
+                    >
+                    <div class="help">Paste an image URL. We'll include the featured image in the article template.</div>
+                    <img id="imagePreview" class="image-preview" alt="Featured image preview">
+                </div>
+            </section>
+
+            <section class="panel">
+                <div class="panel-heading">
+                    <div>
+                        <h2>Article Content</h2>
+                        <p>Write the full article. Format it using the toolbar.</p>
+                    </div>
+                </div>
+
+                <div class="editor-toolbar">
+                    <button type="button" onclick="format('bold')" title="Bold"><b>B</b></button>
+                    <button type="button" onclick="format('italic')" title="Italic"><i>I</i></button>
+                    <button type="button" onclick="format('underline')" title="Underline"><u>U</u></button>
+                    <button type="button" onclick="format('formatBlock','h2')" title="Heading 2">H2</button>
+                    <button type="button" onclick="format('formatBlock','h3')" title="Heading 3">H3</button>
+                    <button type="button" onclick="format('insertUnorderedList')" title="Bullet list">• List</button>
+                    <button type="button" onclick="format('insertOrderedList')" title="Numbered list">1. List</button>
+                    <button type="button" onclick="format('formatBlock','blockquote')" title="Quote">❝ Quote</button>
+                    <button type="button" onclick="addLink()" title="Insert link">↗ Link</button>
+                    <button type="button" onclick="format('removeFormat')" title="Clear formatting">Clear</button>
+                </div>
+
+                <div
+                    id="articleContent"
+                    contenteditable="true"
+                    role="textbox"
+                    aria-label="Article content editor"
+                    aria-multiline="true"
+                ></div>
+
+                <div class="help">
+                    Use headings to divide your article into sections. Write naturally and make the article genuinely useful or interesting to readers.
+                </div>
+            </section>
+
+            <div class="action-bar">
+                <div class="action-left">
+                    <button type="button" class="btn" onclick="saveDraft()">
+                        Save Draft
+                    </button>
+
+                    <button type="button" class="btn btn-preview" onclick="showPreview()">
+                        Preview Article
+                    </button>
+                </div>
+
+                <div class="action-right">
+                    <button type="button" class="btn btn-primary" disabled title="Publishing will be enabled after we connect GitHub">
+                        Publish Article
+                    </button>
+                </div>
+            </div>
+
+        </form>
+
+    </main>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="modal" id="previewModal">
+    <div class="modal-box">
+        <div class="modal-header">
+            <h3>Article Preview</h3>
+            <button class="close-modal" onclick="closePreview()">×</button>
+        </div>
+
+        <div class="preview-content">
+            <div style="color:#7655c7;font-size:12px;font-weight:800;text-transform:uppercase" id="previewCategory"></div>
+            <h1 id="previewTitle">Your article title</h1>
+            <p class="preview-description" id="previewDescription"></p>
+            <img id="previewImage" class="preview-image" style="display:none" alt="">
+            <div id="previewBody"></div>
+        </div>
+    </div>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+
+const titleInput = $("title");
+const slugInput = $("slug");
+const descriptionInput = $("description");
+const contentEditor = $("articleContent");
+
+let slugManuallyEdited = false;
+
+function makeSlug(text) {
+    return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-+|-+$/g, "");
+}
+
+titleInput.addEventListener("input", () => {
+    if (!slugManuallyEdited) {
+        slugInput.value = makeSlug(titleInput.value);
+    }
+    markUnsaved();
+});
+
+slugInput.addEventListener("input", () => {
+    slugManuallyEdited = true;
+    slugInput.value = makeSlug(slugInput.value);
+    markUnsaved();
+});
+
+descriptionInput.addEventListener("input", () => {
+    $("descriptionCount").textContent = descriptionInput.value.length;
+    markUnsaved();
+});
+
+document.querySelectorAll("input, textarea, select").forEach(element => {
+    element.addEventListener("input", markUnsaved);
+    element.addEventListener("change", markUnsaved);
+});
+
+contentEditor.addEventListener("input", markUnsaved);
+
+function markUnsaved() {
+    $("saveStatus").textContent = "Unsaved changes";
+    $("saveStatus").style.background = "#fff7e8";
+    $("saveStatus").style.color = "#a56b13";
+}
+
+function markSaved() {
+    $("saveStatus").textContent = "Draft saved";
+    $("saveStatus").style.background = "#e9f7f0";
+    $("saveStatus").style.color = "#16845b";
+}
+
+function format(command, value = null) {
+    contentEditor.focus();
+    document.execCommand(command, false, value);
+}
+
+function addLink() {
+    const url = prompt("Enter the link URL:");
+    if (!url) return;
+
+    try {
+        const parsed = new URL(url);
+        if (!["http:", "https:"].includes(parsed.protocol)) {
+            throw new Error("Invalid protocol");
+        }
+        contentEditor.focus();
+        document.execCommand("createLink", false, parsed.href);
+    } catch {
+        alert("Please enter a valid HTTP or HTTPS URL.");
+    }
+}
+
+function getArticleData() {
+    return {
+        title: titleInput.value.trim(),
+        slug: slugInput.value.trim(),
+        description: descriptionInput.value.trim(),
+        category: $("category").value,
+        tags: $("tags").value.split(",").map(tag => tag.trim()).filter(Boolean),
+        image: $("image").value.trim(),
+        content: contentEditor.innerHTML,
+        updatedAt: new Date().toISOString()
+    };
+}
+
+function saveDraft() {
+    const data = getArticleData();
+
+    if (!data.title) {
+        alert("Please enter an article title before saving.");
+        titleInput.focus();
+        return;
+    }
+
+    try {
+        localStorage.setItem("wesaidit_article_draft", JSON.stringify(data));
+        markSaved();
+        showToast("Draft saved in this browser.");
+    } catch (error) {
+        showToast("Could not save draft. Browser storage may be full.");
+    }
+}
+
+function loadDraft() {
+    const saved = localStorage.getItem("wesaidit_article_draft");
+    if (!saved) return;
+
+    try {
+        const data = JSON.parse(saved);
+
+        titleInput.value = data.title || "";
+        slugInput.value = data.slug || "";
+        slugManuallyEdited = !!data.slug;
+        descriptionInput.value = data.description || "";
+        $("descriptionCount").textContent = descriptionInput.value.length;
+        $("category").value = data.category || "";
+        $("tags").value = (data.tags || []).join(", ");
+        $("image").value = data.image || "";
+        contentEditor.innerHTML = data.content || "";
+
+        updateImagePreview();
+        markSaved();
+    } catch (error) {
+        console.error("Could not load draft:", error);
+    }
+}
+
+function showPreview() {
+    const data = getArticleData();
+
+    if (!data.title) {
+        alert("Please enter an article title first.");
+        titleInput.focus();
+        return;
+    }
+
+    $("previewTitle").textContent = data.title;
+    $("previewDescription").textContent = data.description;
+    $("previewCategory").textContent = data.category || "Article";
+    $("previewBody").innerHTML = data.content || "<p>Your article content will appear here.</p>";
+
+    if (data.image) {
+        $("previewImage").src = data.image;
+        $("previewImage").style.display = "block";
+    } else {
+        $("previewImage").style.display = "none";
+    }
+
+    $("previewModal").style.display = "block";
+    document.body.style.overflow = "hidden";
+}
+
+function closePreview() {
+    $("previewModal").style.display = "none";
+    document.body.style.overflow = "";
+}
+
+$("previewModal").addEventListener("click", event => {
+    if (event.target === $("previewModal")) closePreview();
+});
+
+function updateImagePreview() {
+    const url = $("image").value.trim();
+    const preview = $("imagePreview");
+
+    if (!url) {
+        preview.style.display = "none";
+        return;
+    }
+
+    preview.onload = () => preview.style.display = "block";
+    preview.onerror = () => preview.style.display = "none";
+    preview.src = url;
+}
+
+$("image").addEventListener("input", updateImagePreview);
+
+function showToast(message) {
+    const toast = $("toast");
+    toast.textContent = message;
+    toast.style.display = "block";
+
+    setTimeout(() => {
+        toast.style.display = "none";
+    }, 3000);
+}
+
+loadDraft();
+</script>
+
+</body>
+</html>
