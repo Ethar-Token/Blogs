@@ -621,164 +621,9 @@ img {
 
 
                 <!-- ARTICLE GRID -->
-                <div class="article-grid">
-
-
-                    <!-- SAMPLE ARTICLE 1 -->
-                    <article class="article-card">
-
-                        <a href="/relationships/why-people-stay-in-unhappy-relationships/">
-
-                            <div class="article-image-placeholder purple">
-                                <i class="fas fa-heart-crack"></i>
-                            </div>
-
-                        </a>
-
-                        <div class="article-info">
-
-                            <span class="article-category">
-                                RELATIONSHIPS
-                            </span>
-
-                            <h3>
-                                <a href="/relationships/why-people-stay-in-unhappy-relationships/">
-                                    Why Do People Stay in Relationships They Know Are Making Them Miserable?
-                                </a>
-                            </h3>
-
-                            <p>
-                                Sometimes leaving seems easier than staying.
-                                So why do so many people remain in relationships
-                                that no longer make them happy?
-                            </p>
-
-                            <div class="article-meta">
-                                <span><i class="far fa-calendar"></i> Coming soon</span>
-                                <span><i class="far fa-clock"></i> 5 min read</span>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- SAMPLE ARTICLE 2 -->
-                    <article class="article-card">
-
-                        <a href="/wild-things/things-people-do-in-secret/">
-
-                            <div class="article-image-placeholder pink">
-                                <i class="fas fa-eye-slash"></i>
-                            </div>
-
-                        </a>
-
-                        <div class="article-info">
-
-                            <span class="article-category">
-                                WILD THINGS
-                            </span>
-
-                            <h3>
-                                <a href="/wild-things/things-people-do-in-secret/">
-                                    Some Things People Do in Secret Are Actually Insane
-                                </a>
-                            </h3>
-
-                            <p>
-                                You think you know someone until you discover
-                                the things they do when nobody is watching.
-                            </p>
-
-                            <div class="article-meta">
-                                <span><i class="far fa-calendar"></i> Coming soon</span>
-                                <span><i class="far fa-clock"></i> 4 min read</span>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- SAMPLE ARTICLE 3 -->
-                    <article class="article-card">
-
-                        <a href="/lets-talk/things-we-normalized-that-shouldnt-be-normal/">
-
-                            <div class="article-image-placeholder orange">
-                                <i class="fas fa-brain"></i>
-                            </div>
-
-                        </a>
-
-                        <div class="article-info">
-
-                            <span class="article-category">
-                                LET'S TALK
-                            </span>
-
-                            <h3>
-                                <a href="/lets-talk/things-we-normalized-that-shouldnt-be-normal/">
-                                    Things Society Has Normalized That Should Never Have Been Normal
-                                </a>
-                            </h3>
-
-                            <p>
-                                Just because everyone does something
-                                doesn't automatically make it right.
-                            </p>
-
-                            <div class="article-meta">
-                                <span><i class="far fa-calendar"></i> Coming soon</span>
-                                <span><i class="far fa-clock"></i> 6 min read</span>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
-                    <!-- SAMPLE ARTICLE 4 -->
-                    <article class="article-card">
-
-                        <a href="/gossip/things-that-happen-behind-closed-doors/">
-
-                            <div class="article-image-placeholder blue">
-                                <i class="fas fa-comment-dots"></i>
-                            </div>
-
-                        </a>
-
-                        <div class="article-info">
-
-                            <span class="article-category">
-                                THE GOSSIP
-                            </span>
-
-                            <h3>
-                                <a href="/gossip/things-that-happen-behind-closed-doors/">
-                                    The Things That Happen Behind Closed Doors Will Surprise You
-                                </a>
-                            </h3>
-
-                            <p>
-                                Every family, friendship and relationship
-                                has a side the outside world rarely sees.
-                            </p>
-
-                            <div class="article-meta">
-                                <span><i class="far fa-calendar"></i> Coming soon</span>
-                                <span><i class="far fa-clock"></i> 5 min read</span>
-                            </div>
-
-                        </div>
-
-                    </article>
-
-
+                <div class="article-grid" id="latestArticles">
+                    <p class="articles-loading">Loading the latest stories...</p>
                 </div>
-
             </section>
 
 
@@ -1151,6 +996,39 @@ img {
     font-size: 48px;
     color: white;
     overflow: hidden;
+}
+
+.article-image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #f1eff5;
+}
+
+.articles-loading,
+.articles-empty,
+.articles-error {
+    grid-column: 1 / -1;
+    padding: 35px 15px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.articles-error {
+    color: #a34b4b;
+}
+
+@media (max-width: 950px) {
+    .article-image {
+        height: 165px;
+    }
+}
+
+@media (max-width: 480px) {
+    .article-image {
+        height: 200px;
+    }
 }
 
 .purple {
@@ -1759,10 +1637,209 @@ img {
 
 <script>
 
+/* SITE PATH
+   Works on GitHub Pages and the future custom domain.
+*/
+
+const SITE_BASE = window.location.hostname === "ethar-token.github.io"
+    ? "/Blogs/"
+    : "/";
+
+function siteUrl(path = "") {
+    return SITE_BASE + String(path).replace(/^\/+/, "");
+}
+
+
+/* FIX INTERNAL LINKS */
+
+document.querySelectorAll('a[href^="/"]').forEach(link => {
+    const href = link.getAttribute("href");
+
+    if (href.startsWith("//")) return;
+
+    link.setAttribute("href", siteUrl(href));
+});
+
+
 /* AUTOMATIC COPYRIGHT YEAR */
 
 document.getElementById("currentYear").textContent =
     new Date().getFullYear();
+
+
+/* FORMAT PUBLICATION DATE */
+
+function formatArticleDate(dateString) {
+    if (!dateString) return "Recently published";
+
+    const date = new Date(dateString);
+
+    if (isNaN(date.getTime())) return "Recently published";
+
+    return date.toLocaleDateString("en", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    });
+}
+
+
+/* SAFELY CREATE ARTICLE CARDS */
+
+function createArticleCard(article) {
+
+    const card = document.createElement("article");
+    card.className = "article-card";
+
+    const articlePath = article.url || `articles/${article.slug}/`;
+    const articleUrl = siteUrl(articlePath);
+
+    const imageLink = document.createElement("a");
+    imageLink.href = articleUrl;
+
+    if (article.image) {
+        const image = document.createElement("img");
+        image.className = "article-image";
+        image.src = article.image;
+        image.alt = article.title || "We Said It article";
+        image.loading = "lazy";
+
+        image.onerror = function() {
+            this.style.display = "none";
+        };
+
+        imageLink.appendChild(image);
+    } else {
+        const placeholder = document.createElement("div");
+        placeholder.className = "article-image-placeholder purple";
+
+        const icon = document.createElement("i");
+        icon.className = "fas fa-book-open";
+
+        placeholder.appendChild(icon);
+        imageLink.appendChild(placeholder);
+    }
+
+    const info = document.createElement("div");
+    info.className = "article-info";
+
+    const category = document.createElement("span");
+    category.className = "article-category";
+    category.textContent = article.category || "GENERAL";
+
+    const heading = document.createElement("h3");
+    const titleLink = document.createElement("a");
+
+    titleLink.href = articleUrl;
+    titleLink.textContent = article.title || "Untitled article";
+
+    heading.appendChild(titleLink);
+
+    const description = document.createElement("p");
+    description.textContent =
+        article.description || "Read the latest conversation on We Said It.";
+
+    const meta = document.createElement("div");
+    meta.className = "article-meta";
+
+    const date = document.createElement("span");
+    const dateIcon = document.createElement("i");
+
+    dateIcon.className = "far fa-calendar";
+    date.appendChild(dateIcon);
+    date.appendChild(
+        document.createTextNode(
+            " " + formatArticleDate(article.publishedAt)
+        )
+    );
+
+    const readTime = document.createElement("span");
+    const clockIcon = document.createElement("i");
+
+    clockIcon.className = "far fa-clock";
+    readTime.appendChild(clockIcon);
+    readTime.appendChild(document.createTextNode(" Read story"));
+
+    meta.appendChild(date);
+    meta.appendChild(readTime);
+
+    info.appendChild(category);
+    info.appendChild(heading);
+    info.appendChild(description);
+    info.appendChild(meta);
+
+    card.appendChild(imageLink);
+    card.appendChild(info);
+
+    return card;
+}
+
+
+/* LOAD PUBLISHED ARTICLES */
+
+async function loadLatestArticles() {
+
+    const container = document.getElementById("latestArticles");
+
+    if (!container) return;
+
+    try {
+
+        const response = await fetch(
+            siteUrl("articles.json") + "?t=" + Date.now(),
+            { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not load articles.");
+        }
+
+        const data = await response.json();
+
+        const articles = Array.isArray(data)
+            ? data
+            : Array.isArray(data.articles)
+                ? data.articles
+                : [];
+
+        const publishedArticles = articles
+            .filter(article => article && article.title && article.slug)
+            .sort((a, b) => {
+                return new Date(b.publishedAt || 0) -
+                       new Date(a.publishedAt || 0);
+            });
+
+        container.replaceChildren();
+
+        if (publishedArticles.length === 0) {
+
+            const empty = document.createElement("p");
+            empty.className = "articles-empty";
+            empty.textContent = "New stories are coming soon. Stay tuned!";
+
+            container.appendChild(empty);
+            return;
+        }
+
+        publishedArticles.slice(0, 4).forEach(article => {
+            container.appendChild(createArticleCard(article));
+        });
+
+    } catch (error) {
+
+        console.error("Article loading error:", error);
+
+        container.replaceChildren();
+
+        const message = document.createElement("p");
+        message.className = "articles-error";
+        message.textContent = "Stories could not be loaded right now. Please try again later.";
+
+        container.appendChild(message);
+    }
+}
+
+loadLatestArticles();
 
 
 /* NEWSLETTER PLACEHOLDER */
@@ -1774,7 +1851,6 @@ document.getElementById("newsletterForm").addEventListener("submit", function(e)
     alert("Newsletter subscriptions will be available soon!");
 
 });
-
 
 </script>
 
