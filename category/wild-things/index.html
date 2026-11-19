@@ -290,6 +290,38 @@ img {
     font-size: 13px;
 }
 
+.load-more-wrap {
+    display: flex;
+    justify-content: center;
+    margin-top: 35px;
+}
+
+.load-more-wrap button {
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    padding: 13px 28px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.load-more-wrap button:hover {
+    background: var(--dark);
+    transform: translateY(-2px);
+}
+
+.load-more-wrap button i {
+    margin-left: 8px;
+}
+
+.load-more-wrap[hidden] {
+    display: none;
+}
+
 .site-footer {
     background: var(--dark);
     color: white;
@@ -403,6 +435,12 @@ img {
             <p class="feed-message">Loading stories...</p>
         </div>
 
+        <div class="load-more-wrap" id="loadMoreWrap" hidden>
+            <button type="button" id="loadMoreButton">
+                Load More Stories <i class="fas fa-arrow-down"></i>
+            </button>
+        </div>
+        
     </section>
 
 </main>
@@ -667,12 +705,57 @@ function belongsToCategory(article, slug) {
 }
 
 
+/* LOAD AND DISPLAY ARTICLES WITH PAGINATION */
+
+const ARTICLES_PER_PAGE = 10;
+
+let allListingArticles = [];
+let displayedArticles = 0;
+
+const listingContainer = document.getElementById("articleListing");
+const resultsCount = document.getElementById("resultsCount");
+const loadMoreWrap = document.getElementById("loadMoreWrap");
+const loadMoreButton = document.getElementById("loadMoreButton");
+
+
+/* UPDATE THE STORY COUNT */
+
+function updateResultsCount() {
+
+    resultsCount.textContent =
+        `Showing ${displayedArticles} of ${allListingArticles.length} ` +
+        (allListingArticles.length === 1 ? "story" : "stories");
+
+}
+
+
+/* DISPLAY THE NEXT 10 ARTICLES */
+
+function showNextArticles() {
+
+    const nextBatch = allListingArticles.slice(
+        displayedArticles,
+        displayedArticles + ARTICLES_PER_PAGE
+    );
+
+    nextBatch.forEach(article => {
+        listingContainer.appendChild(createArticleCard(article));
+    });
+
+    displayedArticles += nextBatch.length;
+
+    updateResultsCount();
+
+    // Hide the button when all articles have been displayed.
+    loadMoreWrap.hidden =
+        displayedArticles >= allListingArticles.length;
+
+}
+
+
 /* LOAD AND DISPLAY ARTICLES */
 
 async function loadListing() {
-
-    const container = document.getElementById("articleListing");
-    const count = document.getElementById("resultsCount");
 
     try {
 
@@ -693,26 +776,32 @@ async function loadListing() {
                 ? data.articles
                 : [];
 
-        let articles = allArticles
-            .filter(article => article && article.title && article.slug);
+        allListingArticles = allArticles.filter(article =>
+            article && article.title && article.slug
+        );
 
+        // Filter articles when viewing a category page.
         if (!isAllStories) {
-            articles = articles.filter(article =>
+
+            allListingArticles = allListingArticles.filter(article =>
                 belongsToCategory(article, currentCategory)
             );
+
         }
 
-        articles.sort((a, b) =>
+        // Always show newest articles first.
+        allListingArticles.sort((a, b) =>
             new Date(b.publishedAt || 0) -
             new Date(a.publishedAt || 0)
         );
 
-        container.replaceChildren();
+        listingContainer.replaceChildren();
 
-        count.textContent =
-            articles.length + (articles.length === 1 ? " story" : " stories");
+        displayedArticles = 0;
 
-        if (articles.length === 0) {
+        loadMoreWrap.hidden = true;
+
+        if (allListingArticles.length === 0) {
 
             const empty = document.createElement("p");
             empty.className = "feed-message";
@@ -721,30 +810,43 @@ async function loadListing() {
                 ? "No stories have been published yet. Check back soon!"
                 : "There are no published stories in this category yet. Check back soon!";
 
-            container.appendChild(empty);
+            listingContainer.appendChild(empty);
+
+            resultsCount.textContent = "0 stories";
+
             return;
         }
 
-        articles.forEach(article => {
-            container.appendChild(createArticleCard(article));
-        });
+        // Display the first 10 articles.
+        showNextArticles();
 
     } catch (error) {
 
         console.error("Listing error:", error);
 
-        container.replaceChildren();
+        listingContainer.replaceChildren();
 
         const message = document.createElement("p");
         message.className = "feed-message";
-        message.textContent = "Stories could not be loaded right now. Please try again later.";
 
-        container.appendChild(message);
-        count.textContent = "";
+        message.textContent =
+            "Stories could not be loaded right now. Please try again later.";
+
+        listingContainer.appendChild(message);
+
+        resultsCount.textContent = "";
+
+        loadMoreWrap.hidden = true;
 
     }
 
 }
+
+
+/* LOAD MORE BUTTON */
+
+loadMoreButton.addEventListener("click", showNextArticles);
+
 
 document.getElementById("currentYear").textContent =
     new Date().getFullYear();
