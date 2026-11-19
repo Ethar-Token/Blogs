@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>All Stories & Conversations — We Said It</title>
+<meta name="description" content="Explore all the latest stories, wild conversations, opinions and real-life topics on We Said It.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#7655c7">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="canonical" href="https://ethar-token.github.io/Blogs/articles/">
+  
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root {
+    --primary: #7655c7;
+    --primary-light: #9b7bea;
+    --primary-pale: #f3efff;
+    --background: #faf9fd;
+    --surface: #fff;
+    --text: #29243a;
+    --muted: #777386;
+    --border: #eeeaf4;
+    --dark: #191622;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(35,25,60,.045);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.topbar {
+    background: var(--dark);
+    color: white;
+    padding: 8px 5%;
+    font-size: 12px;
+}
+
+.topbar-inner {
+    max-width: 1190px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.topbar a {
+    color: #d6c9f6;
+}
+
+.site-header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    max-width: 1190px;
+    margin: auto;
+    padding: 17px 22px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.main-nav {
+    border-top: 1px solid var(--border);
+}
+
+.nav-inner {
+    max-width: 1190px;
+    margin: auto;
+    padding: 0 22px;
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-inner a {
+    padding: 13px 0;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.nav-inner a:hover,
+.nav-inner a.active {
+    color: var(--primary);
+}
+
+.container {
+    max-width: 1190px;
+    margin: auto;
+    padding: 40px 22px 60px;
+}
+
+.breadcrumb {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+.breadcrumb a {
+    color: var(--primary);
+}
+
+.page-heading {
+    background: var(--dark);
+    color: white;
+    padding: 38px;
+    border-radius: var(--radius);
+    margin-bottom: 35px;
+}
+
+.page-heading > span {
+    display: block;
+    color: #c6aaff;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+.page-heading h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 5vw, 43px);
+    line-height: 1.2;
+    margin-bottom: 10px;
+}
+
+.page-heading p {
+    color: #d0cbd9;
+    font-size: 13px;
+    max-width: 650px;
+}
+
+.results-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.results-heading h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+}
+
+.results-count {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.article-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px 20px;
+}
+
+.article-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    overflow: hidden;
+    transition: .25s;
+}
+
+.article-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+}
+
+.article-image-link {
+    display: block;
+}
+
+.article-image {
+    width: 100%;
+    height: 190px;
+    object-fit: cover;
+    background: #f1eff5;
+}
+
+.article-placeholder {
+    height: 190px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #7655c7, #b7a0ed);
+    color: white;
+    font-size: 42px;
+}
+
+.article-info {
+    padding: 18px;
+}
+
+.article-category {
+    display: inline-block;
+    color: var(--primary);
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    margin-bottom: 9px;
+    text-transform: uppercase;
+}
+
+.article-info h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px;
+    line-height: 1.35;
+    margin-bottom: 10px;
+}
+
+.article-info h2 a:hover {
+    color: var(--primary);
+}
+
+.article-info p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.7;
+    margin-bottom: 16px;
+}
+
+.article-meta {
+    border-top: 1px solid var(--border);
+    padding-top: 12px;
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.article-meta i {
+    color: var(--primary-light);
+    margin-right: 4px;
+}
+
+.feed-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 45px 15px;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.site-footer {
+    background: var(--dark);
+    color: white;
+    padding: 35px 22px;
+    text-align: center;
+}
+
+.site-footer p {
+    color: #aaa5b8;
+    font-size: 11px;
+}
+
+.site-footer a {
+    color: #c6aaff;
+}
+
+@media (max-width: 850px) {
+    .article-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 550px) {
+    .topbar {
+        padding: 8px 15px;
+    }
+
+    .header-inner {
+        padding: 14px 16px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .nav-inner {
+        padding: 0 16px;
+        gap: 22px;
+    }
+
+    .container {
+        padding: 25px 15px 45px;
+    }
+
+    .page-heading {
+        padding: 27px 22px;
+    }
+
+    .article-grid {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .article-image,
+    .article-placeholder {
+        height: 210px;
+    }
+
+    .results-heading h2 {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="topbar-inner">
+        <span>Some things just need to be said.</span>
+        <a id="homeTopLink" href="#">Back to home <i class="fas fa-arrow-right"></i></a>
+    </div>
+</div>
+
+<header class="site-header">
+
+    <div class="header-inner">
+        <a id="logoLink" href="#" class="logo">WE SAID<span> IT.</span></a>
+    </div>
+
+    <nav class="main-nav">
+        <div class="nav-inner" id="navigation"></div>
+    </nav>
+
+</header>
+
+<main class="container">
+
+    <div class="breadcrumb">
+        <a id="breadcrumbHome" href="#">Home</a>
+        <span> / </span>
+        <span id="breadcrumbCurrent">All Stories</span>
+    </div>
+
+    <section class="page-heading">
+        <span id="pageEyebrow">THE WE SAID IT COLLECTION</span>
+        <h1 id="pageTitle">All Stories</h1>
+        <p id="pageDescription">
+            Explore the latest stories, opinions and conversations.
+        </p>
+    </section>
+
+    <section>
+
+        <div class="results-heading">
+            <h2 id="resultsTitle">Latest Stories</h2>
+            <span class="results-count" id="resultsCount"></span>
+        </div>
+
+        <div class="article-grid" id="articleListing">
+            <p class="feed-message">Loading stories...</p>
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <p>
+        © <span id="currentYear"></span> We Said It.
+        All rights reserved.
+        <a id="footerHome" href="#">Home</a>
+    </p>
+</footer>
+
+<script>
+
+const SITE_BASE = window.location.hostname === "ethar-token.github.io"
+    ? "/Blogs/"
+    : "/";
+
+function siteUrl(path = "") {
+    return SITE_BASE + String(path).replace(/^\/+/, "");
+}
+
+const categories = [
+    { name: "Home", slug: "", path: "" },
+    { name: "Wild Things", slug: "wild-things", path: "category/wild-things/" },
+    { name: "Let's Talk", slug: "lets-talk", path: "category/lets-talk/" },
+    { name: "Relationships", slug: "relationships", path: "category/relationships/" },
+    { name: "The Gossip", slug: "gossip", path: "category/gossip/" },
+    { name: "Human Behaviour", slug: "human-behaviour", path: "category/human-behaviour/" },
+    { name: "Internet Culture", slug: "internet-culture", path: "category/internet-culture/" },
+    { name: "Anonymous Stories", slug: "anonymous-stories", path: "category/anonymous-stories/" }
+];
+
+function slugify(value) {
+    return String(value || "")
+        .toLowerCase()
+        .trim()
+        .replace(/&/g, "and")
+        .replace(/[^a-z0-9]+/g, "-")
+        .replace(/^-|-$/g, "");
+}
+
+function getArticleUrl(article) {
+    const path = article.url || `articles/${article.slug}/`;
+
+    if (/^https?:\/\//i.test(path)) {
+        return path;
+    }
+
+    return siteUrl(path);
+}
+
+function formatDate(value) {
+    if (!value) return "Recently published";
+
+    const date = new Date(value);
+
+    if (isNaN(date.getTime())) return "Recently published";
+
+    return date.toLocaleDateString("en", {
+        day: "numeric",
+        month: "short",
+        year: "numeric"
+    });
+}
+
+
+/* DETERMINE WHICH PAGE IS OPEN */
+
+const pathParts = window.location.pathname
+    .split("/")
+    .filter(Boolean);
+
+const categoryIndex = pathParts.indexOf("category");
+
+let currentCategory = null;
+
+if (categoryIndex !== -1 && pathParts[categoryIndex + 1]) {
+    currentCategory = pathParts[categoryIndex + 1];
+}
+
+const isAllStories = !currentCategory;
+
+const currentCategoryInfo = categories.find(
+    category => category.slug === currentCategory
+);
+
+const categoryName = currentCategoryInfo
+    ? currentCategoryInfo.name
+    : currentCategory
+        ? currentCategory.replace(/-/g, " ")
+        : "All Stories";
+
+
+/* SET PAGE TEXT AND SEO TITLE */
+
+const pageTitle = isAllStories
+    ? "All Stories"
+    : categoryName;
+
+document.title = pageTitle + " — We Said It";
+
+document.getElementById("pageTitle").textContent = pageTitle;
+
+document.getElementById("breadcrumbCurrent").textContent = pageTitle;
+
+document.getElementById("resultsTitle").textContent =
+    isAllStories ? "Latest Stories" : "Latest " + pageTitle + " Stories";
+
+document.getElementById("pageEyebrow").textContent =
+    isAllStories ? "THE WE SAID IT COLLECTION" : "EXPLORE THE TOPIC";
+
+document.getElementById("pageDescription").textContent =
+    isAllStories
+        ? "Explore all our latest stories, wild opinions, real conversations and topics worth talking about."
+        : "Explore stories, opinions and conversations about " + categoryName + ".";
+
+
+/* SET HOME LINKS */
+
+["homeTopLink", "logoLink", "breadcrumbHome", "footerHome"].forEach(id => {
+    document.getElementById(id).href = siteUrl("");
+});
+
+
+/* BUILD NAVIGATION */
+
+const navigation = document.getElementById("navigation");
+
+categories.forEach(category => {
+
+    const link = document.createElement("a");
+
+    link.href = category.path
+        ? siteUrl(category.path)
+        : siteUrl("");
+
+    link.textContent = category.name;
+
+    if (
+        (isAllStories && category.slug === "") ||
+        (!isAllStories && category.slug === currentCategory)
+    ) {
+        link.className = "active";
+    }
+
+    navigation.appendChild(link);
+
+});
+
+const allStoriesLink = document.createElement("a");
+allStoriesLink.href = siteUrl("articles/");
+allStoriesLink.textContent = "All Stories";
+
+if (isAllStories) {
+    allStoriesLink.className = "active";
+}
+
+navigation.appendChild(allStoriesLink);
+
+
+/* CREATE ARTICLE CARD */
+
+function createArticleCard(article) {
+
+    const card = document.createElement("article");
+    card.className = "article-card";
+
+    const articleUrl = getArticleUrl(article);
+
+    const imageLink = document.createElement("a");
+    imageLink.className = "article-image-link";
+    imageLink.href = articleUrl;
+
+    if (article.image) {
+
+        const image = document.createElement("img");
+
+        image.className = "article-image";
+        image.src = article.image;
+        image.alt = article.title || "We Said It story";
+        image.loading = "lazy";
+
+        image.onerror = function() {
+            const placeholder = document.createElement("div");
+            placeholder.className = "article-placeholder";
+
+            const icon = document.createElement("i");
+            icon.className = "fas fa-book-open";
+
+            placeholder.appendChild(icon);
+            this.replaceWith(placeholder);
+        };
+
+        imageLink.appendChild(image);
+
+    } else {
+
+        const placeholder = document.createElement("div");
+        placeholder.className = "article-placeholder";
+
+        const icon = document.createElement("i");
+        icon.className = "fas fa-book-open";
+
+        placeholder.appendChild(icon);
+        imageLink.appendChild(placeholder);
+
+    }
+
+    const info = document.createElement("div");
+    info.className = "article-info";
+
+    const category = document.createElement("span");
+    category.className = "article-category";
+    category.textContent = article.category || "GENERAL";
+
+    const heading = document.createElement("h2");
+    const titleLink = document.createElement("a");
+
+    titleLink.href = articleUrl;
+    titleLink.textContent = article.title;
+
+    heading.appendChild(titleLink);
+
+    const description = document.createElement("p");
+    description.textContent =
+        article.description || "Read this story on We Said It.";
+
+    const meta = document.createElement("div");
+    meta.className = "article-meta";
+
+    const icon = document.createElement("i");
+    icon.className = "far fa-calendar";
+
+    meta.appendChild(icon);
+    meta.appendChild(
+        document.createTextNode(" " + formatDate(article.publishedAt))
+    );
+
+    info.appendChild(category);
+    info.appendChild(heading);
+    info.appendChild(description);
+    info.appendChild(meta);
+
+    card.appendChild(imageLink);
+    card.appendChild(info);
+
+    return card;
+}
+
+
+/* FILTER CATEGORY ARTICLES */
+
+function belongsToCategory(article, slug) {
+
+    const articleCategory = slugify(article.category);
+
+    // "The Gossip" and "Gossip" both belong to the Gossip category.
+    const normalizedArticleCategory = articleCategory.replace(/^the-/, "");
+
+    return normalizedArticleCategory === slug;
+}
+
+
+/* LOAD AND DISPLAY ARTICLES */
+
+async function loadListing() {
+
+    const container = document.getElementById("articleListing");
+    const count = document.getElementById("resultsCount");
+
+    try {
+
+        const response = await fetch(
+            siteUrl("articles.json") + "?t=" + Date.now(),
+            { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+            throw new Error("Could not load articles.");
+        }
+
+        const data = await response.json();
+
+        const allArticles = Array.isArray(data)
+            ? data
+            : Array.isArray(data.articles)
+                ? data.articles
+                : [];
+
+        let articles = allArticles
+            .filter(article => article && article.title && article.slug);
+
+        if (!isAllStories) {
+            articles = articles.filter(article =>
+                belongsToCategory(article, currentCategory)
+            );
+        }
+
+        articles.sort((a, b) =>
+            new Date(b.publishedAt || 0) -
+            new Date(a.publishedAt || 0)
+        );
+
+        container.replaceChildren();
+
+        count.textContent =
+            articles.length + (articles.length === 1 ? " story" : " stories");
+
+        if (articles.length === 0) {
+
+            const empty = document.createElement("p");
+            empty.className = "feed-message";
+
+            empty.textContent = isAllStories
+                ? "No stories have been published yet. Check back soon!"
+                : "There are no published stories in this category yet. Check back soon!";
+
+            container.appendChild(empty);
+            return;
+        }
+
+        articles.forEach(article => {
+            container.appendChild(createArticleCard(article));
+        });
+
+    } catch (error) {
+
+        console.error("Listing error:", error);
+
+        container.replaceChildren();
+
+        const message = document.createElement("p");
+        message.className = "feed-message";
+        message.textContent = "Stories could not be loaded right now. Please try again later.";
+
+        container.appendChild(message);
+        count.textContent = "";
+
+    }
+
+}
+
+document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+loadListing();
+
+</script>
+
+</body>
+</html>
