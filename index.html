@@ -568,28 +568,8 @@ img {
         </div>
 
 
-        <div class="trending-topics">
-
-            <a href="/tag/relationships/" class="trending-topic">
-                <span>#</span> Relationships
-            </a>
-
-            <a href="/tag/human-behaviour/" class="trending-topic">
-                <span>#</span> Human Behaviour
-            </a>
-
-            <a href="/tag/cheating/" class="trending-topic">
-                <span>#</span> Cheating
-            </a>
-
-            <a href="/tag/unpopular-opinions/" class="trending-topic">
-                <span>#</span> Unpopular Opinions
-            </a>
-
-            <a href="/tag/internet-drama/" class="trending-topic">
-                <span>#</span> Internet Drama
-            </a>
-
+        <div class="trending-topics" id="trendingTopics">
+            <span class="homepage-feed-message">Loading trending topics...</span>
         </div>
 
     </section>
@@ -656,54 +636,8 @@ img {
                 </div>
 
 
-                <div class="popular-list">
-
-
-                    <a href="/category/human-behaviour/" class="popular-item">
-
-                        <span class="popular-number">01</span>
-
-                        <div>
-                            <span class="article-category">HUMAN BEHAVIOUR</span>
-                            <h3>Why Do Some People Enjoy Making Others Feel Small?</h3>
-                            <p>Understanding behaviour that leaves people questioning themselves.</p>
-                        </div>
-
-                        <i class="fas fa-arrow-right"></i>
-
-                    </a>
-
-
-                    <a href="/category/relationships/" class="popular-item">
-
-                        <span class="popular-number">02</span>
-
-                        <div>
-                            <span class="article-category">RELATIONSHIPS</span>
-                            <h3>Is It Ever Okay to Check Your Partner's Phone?</h3>
-                            <p>Privacy, trust and the never-ending relationship debate.</p>
-                        </div>
-
-                        <i class="fas fa-arrow-right"></i>
-
-                    </a>
-
-
-                    <a href="/category/lets-talk/" class="popular-item">
-
-                        <span class="popular-number">03</span>
-
-                        <div>
-                            <span class="article-category">LET'S TALK</span>
-                            <h3>Unpopular Opinions People Are Too Afraid to Say Out Loud</h3>
-                            <p>Some thoughts will definitely get people talking.</p>
-                        </div>
-
-                        <i class="fas fa-arrow-right"></i>
-
-                    </a>
-
-
+                <div class="popular-list" id="popularArticles">
+                    <p class="homepage-feed-message">Loading conversations...</p>
                 </div>
 
             </section>
@@ -1439,6 +1373,27 @@ img {
     color: white;
 }
 
+/* DYNAMIC HOMEPAGE CONTENT */
+
+.homepage-feed-message {
+    display: block;
+    width: 100%;
+    padding: 22px;
+    text-align: center;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.trending-empty {
+    color: var(--muted);
+    font-size: 12px;
+    padding: 8px 0;
+}
+
+.trending-topic {
+    text-transform: capitalize;
+}
+
 
 /* MOBILE RESPONSIVENESS */
 
@@ -1777,11 +1732,183 @@ function createArticleCard(article) {
 
 /* LOAD PUBLISHED ARTICLES */
 
-async function loadLatestArticles() {
 
-    const container = document.getElementById("latestArticles");
+/* CREATE ARTICLE LINKS */
+
+function getArticleUrl(article) {
+    const path = article.url || `articles/${article.slug}/`;
+
+    if (/^https?:\/\//i.test(path)) {
+        return path;
+    }
+
+    return siteUrl(path);
+}
+
+
+/* CREATE POPULAR CONVERSATION ITEMS */
+
+function createPopularItem(article, index) {
+
+    const link = document.createElement("a");
+    link.className = "popular-item";
+    link.href = getArticleUrl(article);
+
+    const number = document.createElement("span");
+    number.className = "popular-number";
+    number.textContent = String(index + 1).padStart(2, "0");
+
+    const content = document.createElement("div");
+
+    const category = document.createElement("span");
+    category.className = "article-category";
+    category.textContent = article.category || "GENERAL";
+
+    const heading = document.createElement("h3");
+    heading.textContent = article.title;
+
+    const description = document.createElement("p");
+    description.textContent =
+        article.description || "Read this conversation on We Said It.";
+
+    content.appendChild(category);
+    content.appendChild(heading);
+    content.appendChild(description);
+
+    const arrow = document.createElement("i");
+    arrow.className = "fas fa-arrow-right";
+
+    link.appendChild(number);
+    link.appendChild(content);
+    link.appendChild(arrow);
+
+    return link;
+}
+
+
+/* EXTRACT ARTICLE TAGS */
+
+function getArticleTags(article) {
+
+    let tags = article.tags || [];
+
+    if (typeof tags === "string") {
+        tags = tags.split(",");
+    }
+
+    if (!Array.isArray(tags)) {
+        return [];
+    }
+
+    return [...new Set(
+        tags
+            .map(tag => String(tag).trim().replace(/^#/, ""))
+            .filter(Boolean)
+            .map(tag => ({
+                name: tag,
+                key: tag.toLowerCase()
+            }))
+            .map(tag => tag)
+    )];
+}
+
+
+/* GENERATE TRENDING TOPICS */
+
+function renderTrendingTopics(articles) {
+
+    const container = document.getElementById("trendingTopics");
 
     if (!container) return;
+
+    container.replaceChildren();
+
+    const topicMap = new Map();
+
+    articles.forEach(article => {
+
+        const articleTags = getArticleTags(article);
+        const articleDate = new Date(article.publishedAt || 0);
+
+        const articleTagKeys = new Set();
+
+        articleTags.forEach(tag => {
+
+            if (articleTagKeys.has(tag.key)) return;
+            articleTagKeys.add(tag.key);
+
+            if (!topicMap.has(tag.key)) {
+
+                topicMap.set(tag.key, {
+                    name: tag.name,
+                    count: 0,
+                    latestDate: articleDate,
+                    article: article
+                });
+
+            }
+
+            const topic = topicMap.get(tag.key);
+
+            topic.count++;
+
+            if (articleDate > topic.latestDate) {
+                topic.latestDate = articleDate;
+                topic.article = article;
+            }
+
+        });
+
+    });
+
+    const trending = [...topicMap.values()]
+        .sort((a, b) => {
+            if (b.count !== a.count) {
+                return b.count - a.count;
+            }
+
+            return b.latestDate - a.latestDate;
+        })
+        .slice(0, 5);
+
+    if (trending.length === 0) {
+
+        const empty = document.createElement("span");
+        empty.className = "trending-empty";
+        empty.textContent = "Trending topics will appear as articles are published.";
+
+        container.appendChild(empty);
+        return;
+    }
+
+    trending.forEach(topic => {
+
+        const link = document.createElement("a");
+        link.className = "trending-topic";
+
+        // Link to a real article containing this topic.
+        link.href = getArticleUrl(topic.article);
+        link.title = `${topic.count} published article${topic.count === 1 ? "" : "s"} tagged ${topic.name}`;
+
+        const hash = document.createElement("span");
+        hash.textContent = "#";
+
+        link.appendChild(hash);
+        link.appendChild(document.createTextNode(" " + topic.name));
+
+        container.appendChild(link);
+
+    });
+
+}
+
+
+/* LOAD ALL HOMEPAGE CONTENT */
+
+async function loadHomepageArticles() {
+
+    const latestContainer = document.getElementById("latestArticles");
+    const popularContainer = document.getElementById("popularArticles");
 
     try {
 
@@ -1803,43 +1930,107 @@ async function loadLatestArticles() {
                 : [];
 
         const publishedArticles = articles
-            .filter(article => article && article.title && article.slug)
+            .filter(article =>
+                article &&
+                article.title &&
+                article.slug
+            )
             .sort((a, b) => {
                 return new Date(b.publishedAt || 0) -
                        new Date(a.publishedAt || 0);
             });
 
-        container.replaceChildren();
 
-        if (publishedArticles.length === 0) {
+        /* LATEST STORIES */
 
-            const empty = document.createElement("p");
-            empty.className = "articles-empty";
-            empty.textContent = "New stories are coming soon. Stay tuned!";
+        if (latestContainer) {
 
-            container.appendChild(empty);
-            return;
+            latestContainer.replaceChildren();
+
+            if (publishedArticles.length === 0) {
+
+                const empty = document.createElement("p");
+                empty.className = "articles-empty";
+                empty.textContent = "New stories are coming soon. Stay tuned!";
+
+                latestContainer.appendChild(empty);
+
+            } else {
+
+                publishedArticles.slice(0, 4).forEach(article => {
+                    latestContainer.appendChild(
+                        createArticleCard(article)
+                    );
+                });
+
+            }
+
         }
 
-        publishedArticles.slice(0, 4).forEach(article => {
-            container.appendChild(createArticleCard(article));
-        });
+
+        /* POPULAR CONVERSATIONS */
+
+        if (popularContainer) {
+
+            popularContainer.replaceChildren();
+
+            if (publishedArticles.length === 0) {
+
+                const empty = document.createElement("p");
+                empty.className = "homepage-feed-message";
+                empty.textContent = "Published conversations will appear here.";
+
+                popularContainer.appendChild(empty);
+
+            } else {
+
+                publishedArticles.slice(0, 3).forEach((article, index) => {
+
+                    popularContainer.appendChild(
+                        createPopularItem(article, index)
+                    );
+
+                });
+
+            }
+
+        }
+
+
+        /* TRENDING TOPICS */
+
+        renderTrendingTopics(publishedArticles);
+
 
     } catch (error) {
 
-        console.error("Article loading error:", error);
+        console.error("Homepage feed error:", error);
 
-        container.replaceChildren();
+        const containers = [
+            latestContainer,
+            popularContainer,
+            document.getElementById("trendingTopics")
+        ];
 
-        const message = document.createElement("p");
-        message.className = "articles-error";
-        message.textContent = "Stories could not be loaded right now. Please try again later.";
+        containers.forEach(container => {
 
-        container.appendChild(message);
+            if (!container) return;
+
+            container.replaceChildren();
+
+            const message = document.createElement("p");
+            message.className = "homepage-feed-message";
+            message.textContent = "Content could not be loaded. Please try again later.";
+
+            container.appendChild(message);
+
+        });
+
     }
+
 }
 
-loadLatestArticles();
+loadHomepageArticles();
 
 
 /* NEWSLETTER PLACEHOLDER */
