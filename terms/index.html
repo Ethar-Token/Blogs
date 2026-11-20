@@ -6,18 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Terms of Use — We Said It</title>
-    <meta name="description" content="Read the Terms of Use for We Said It. Learn about website access, acceptable use, intellectual property, disclaimers and your responsibilities when using our website.">
+    <meta name="description" content="Read the Terms of Use for We Said It, including rules for using our website, intellectual property, content disclaimers and legal information.">
     <meta name="robots" content="index, follow, max-image-preview:large">
     <link rel="canonical" href="https://ethar-token.github.io/Blogs/terms/">
 
     <meta property="og:type" content="website">
     <meta property="og:title" content="Terms of Use — We Said It">
-    <meta property="og:description" content="The terms and conditions that apply when you access and use We Said It.">
+    <meta property="og:description" content="Learn about the terms and conditions that apply when using We Said It.">
     <meta property="og:url" content="https://ethar-token.github.io/Blogs/terms/">
 
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Terms of Use — We Said It">
-    <meta name="twitter:description" content="Read the Terms of Use for We Said It.">
+    <meta name="twitter:description" content="Learn about the terms and conditions that apply when using We Said It.">
 
     <meta name="theme-color" content="#7655c7">
 
@@ -29,22 +29,19 @@
 
     <style>
         :root {
-            --purple: #7655c7;
-            --purple-light: #9b7bea;
-            --purple-pale: #f3efff;
-            --purple-border: #e9ddff;
+            --primary: #7655c7;
+            --primary-light: #9b7bea;
+            --dark: #191622;
             --background: #faf9fd;
-            --white: #ffffff;
-            --text: #29243a;
+            --border: #eeeaf4;
             --muted: #777184;
-            --border: #eeeaf5;
-            --shadow: 0 5px 24px rgba(48, 35, 78, 0.06);
+            --white: #ffffff;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         html {
@@ -54,7 +51,7 @@
         body {
             font-family: "DM Sans", sans-serif;
             background: var(--background);
-            color: var(--text);
+            color: var(--dark);
             line-height: 1.7;
         }
 
@@ -63,34 +60,38 @@
             text-decoration: none;
         }
 
+        /* TOPBAR */
+
         .topbar {
-            background: #211b31;
+            background: var(--dark);
             color: #fff;
-            padding: 8px 5%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            padding: 9px 22px;
             font-size: 12px;
         }
 
-        .topbar p {
-            opacity: 0.85;
-        }
-
-        .topbar-socials {
+        .topbar-inner {
+            max-width: 1190px;
+            margin: auto;
             display: flex;
+            align-items: center;
+            justify-content: space-between;
             gap: 15px;
         }
 
-        .topbar-socials a {
-            color: #fff;
-            opacity: 0.85;
-            transition: opacity 0.2s;
+        .topbar p {
+            color: #d5d1df;
         }
 
-        .topbar-socials a:hover {
-            opacity: 1;
+        .topbar a {
+            color: #d5d1df;
+            white-space: nowrap;
         }
+
+        .topbar a:hover {
+            color: #fff;
+        }
+
+        /* HEADER */
 
         .site-header {
             background: #fff;
@@ -98,58 +99,28 @@
         }
 
         .header-inner {
-            max-width: 1200px;
+            max-width: 1190px;
             margin: auto;
-            padding: 22px 24px;
+            min-height: 85px;
+            padding: 15px 22px;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 20px;
         }
 
-        .logo {
+        .brand {
             font-family: "Playfair Display", serif;
             font-size: 30px;
             font-weight: 800;
-            color: var(--text);
             letter-spacing: -1px;
+            color: var(--dark);
         }
 
-        .logo span {
-            color: var(--purple);
+        .brand span {
+            color: var(--primary);
         }
 
-        .header-tagline {
-            color: var(--muted);
-            font-size: 12px;
-            margin-top: -3px;
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            gap: 18px;
-        }
-
-        .header-right a {
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .header-right a:hover {
-            color: var(--purple);
-        }
-
-        .header-search {
-            width: 39px;
-            height: 39px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background: var(--purple-pale);
-            border-radius: 50%;
-            color: var(--purple) !important;
-        }
+        /* NAVIGATION */
 
         .main-nav {
             background: #fff;
@@ -157,12 +128,12 @@
         }
 
         .nav-inner {
-            max-width: 1200px;
+            max-width: 1190px;
             margin: auto;
-            padding: 0 24px;
+            padding: 0 22px;
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 28px;
             overflow-x: auto;
             scrollbar-width: none;
         }
@@ -172,24 +143,26 @@
         }
 
         .nav-inner a {
-            white-space: nowrap;
+            display: inline-block;
             padding: 13px 0;
+            color: #625d6c;
             font-size: 13px;
             font-weight: 600;
-            color: #615b6e;
+            white-space: nowrap;
             border-bottom: 2px solid transparent;
         }
 
-        .nav-inner a:hover,
-        .nav-inner a.active {
-            color: var(--purple);
-            border-bottom-color: var(--purple);
+        .nav-inner a:hover {
+            color: var(--primary);
+            border-bottom-color: var(--primary);
         }
 
+        /* PAGE CONTENT */
+
         .page-container {
-            max-width: 1000px;
+            max-width: 950px;
             margin: 45px auto 75px;
-            padding: 0 24px;
+            padding: 0 22px;
         }
 
         .breadcrumb {
@@ -199,24 +172,20 @@
         }
 
         .breadcrumb a {
-            color: var(--purple);
+            color: var(--primary);
         }
 
-        .page-hero {
-            background: linear-gradient(135deg, #f3efff, #fff);
-            border: 1px solid var(--purple-border);
-            border-radius: 18px;
-            padding: 42px 38px;
-            margin-bottom: 28px;
+        .page-heading {
+            margin-bottom: 30px;
         }
 
-        .page-label {
+        .page-heading .eyebrow {
             display: inline-block;
-            background: #fff;
-            color: var(--purple);
-            border: 1px solid var(--purple-border);
+            color: var(--primary);
+            background: #f0eaff;
+            border: 1px solid #e5d9ff;
+            padding: 5px 12px;
             border-radius: 30px;
-            padding: 5px 13px;
             font-size: 11px;
             font-weight: 800;
             letter-spacing: 1px;
@@ -224,227 +193,157 @@
             margin-bottom: 13px;
         }
 
-        .page-hero h1 {
+        .page-heading h1 {
             font-family: "Playfair Display", serif;
-            font-size: clamp(32px, 5vw, 45px);
+            font-size: clamp(34px, 5vw, 46px);
             line-height: 1.2;
-            margin-bottom: 13px;
-            color: var(--text);
+            margin-bottom: 12px;
         }
 
-        .page-hero p {
-            max-width: 700px;
-            color: #625b70;
-            font-size: 15px;
-        }
-
-        .updated-date {
-            margin-top: 18px;
-            font-size: 12px;
+        .page-heading > p {
             color: var(--muted);
+            font-size: 15px;
+            max-width: 720px;
         }
 
-        .policy-content {
+        .last-updated {
+            margin-top: 15px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        /* TERMS CONTENT */
+
+        .terms-content {
             background: #fff;
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: 14px;
             padding: 38px;
-            box-shadow: var(--shadow);
         }
 
-        .policy-content h2 {
+        .terms-content h2 {
             font-family: "Playfair Display", serif;
-            font-size: 23px;
-            line-height: 1.35;
-            margin: 34px 0 12px;
-            color: var(--text);
+            font-size: 22px;
+            line-height: 1.4;
+            margin: 32px 0 12px;
         }
 
-        .policy-content h2:first-child {
+        .terms-content h2:first-child {
             margin-top: 0;
         }
 
-        .policy-content h3 {
-            font-size: 16px;
-            margin: 20px 0 8px;
-        }
-
-        .policy-content p {
+        .terms-content p {
             color: #625d6c;
             font-size: 14px;
-            margin-bottom: 13px;
+            margin-bottom: 14px;
         }
 
-        .policy-content ul {
+        .terms-content ul {
             padding-left: 22px;
-            margin: 10px 0 17px;
-            color: #625d6c;
+            margin: 10px 0 18px;
         }
 
-        .policy-content li {
+        .terms-content li {
+            color: #625d6c;
             font-size: 14px;
             margin-bottom: 8px;
             padding-left: 4px;
         }
 
-        .policy-content a {
-            color: var(--purple);
+        .terms-content a {
+            color: var(--primary);
             text-decoration: underline;
             text-underline-offset: 3px;
         }
 
-        .policy-note {
-            background: var(--purple-pale);
-            border-left: 4px solid var(--purple);
-            padding: 17px 20px;
-            border-radius: 8px;
-            margin: 22px 0;
-        }
-
-        .policy-note p {
-            margin: 0;
-            color: #51476a;
-        }
-
-        .contact-card {
-            background: #f8f6fd;
-            border: 1px solid var(--purple-border);
-            border-radius: 12px;
+        .terms-contact {
+            background: #f7f4ff;
+            border: 1px solid #e9ddff;
+            border-radius: 10px;
             padding: 22px;
-            margin-top: 28px;
+            margin-top: 25px;
         }
 
-        .contact-card h2 {
+        .terms-contact h2 {
             margin-top: 0;
         }
 
+        /* FOOTER */
+
         .site-footer {
-            background: #211b31;
+            background: var(--dark);
             color: #fff;
-            padding: 48px 24px 20px;
+            padding: 35px 22px;
         }
 
         .footer-inner {
-            max-width: 1200px;
+            max-width: 1190px;
             margin: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
         }
 
-        .footer-logo {
-            font-family: "Playfair Display", serif;
-            font-size: 27px;
-            font-weight: 800;
-            margin-bottom: 12px;
-        }
-
-        .footer-logo span {
-            color: #b69bff;
-        }
-
-        .footer-about p {
+        .footer-inner p {
             color: #c3bdcf;
             font-size: 13px;
-            max-width: 350px;
         }
 
-        .footer-column h3 {
+        .footer-inner a {
+            color: #c3bdcf;
             font-size: 13px;
-            margin-bottom: 15px;
+        }
+
+        .footer-inner a:hover {
             color: #fff;
         }
 
-        .footer-column a {
-            display: block;
-            color: #c3bdcf;
-            font-size: 13px;
-            margin-bottom: 9px;
-        }
+        /* MOBILE */
 
-        .footer-column a:hover {
-            color: #c4adff;
-        }
-
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 35px auto 0;
-            padding-top: 18px;
-            border-top: 1px solid rgba(255,255,255,0.12);
-            display: flex;
-            justify-content: space-between;
-            gap: 15px;
-            flex-wrap: wrap;
-            color: #aaa3b8;
-            font-size: 12px;
-        }
-
-        @media (max-width: 700px) {
+        @media (max-width: 650px) {
             .topbar {
-                padding: 8px 16px;
+                padding: 9px 16px;
             }
 
-            .topbar p {
-                font-size: 10px;
+            .topbar-inner {
+                font-size: 11px;
             }
 
             .header-inner {
-                padding: 17px 18px;
+                min-height: 72px;
+                padding: 12px 17px;
             }
 
-            .logo {
-                font-size: 26px;
-            }
-
-            .header-tagline {
-                font-size: 10px;
-            }
-
-            .header-right {
-                gap: 12px;
-            }
-
-            .header-right > a:not(.header-search) {
-                display: none;
+            .brand {
+                font-size: 27px;
             }
 
             .nav-inner {
-                padding: 0 18px;
-                gap: 22px;
+                padding: 0 17px;
+                gap: 23px;
             }
 
             .page-container {
-                margin: 28px auto 50px;
-                padding: 0 15px;
+                margin: 30px auto 50px;
+                padding: 0 16px;
             }
 
-            .page-hero {
-                padding: 30px 23px;
+            .page-heading h1 {
+                font-size: 35px;
             }
 
-            .page-hero h1 {
-                font-size: 33px;
+            .terms-content {
+                padding: 25px 20px;
             }
 
-            .policy-content {
-                padding: 25px 21px;
-            }
-
-            .policy-content h2 {
-                font-size: 21px;
+            .terms-content h2 {
+                font-size: 20px;
             }
 
             .footer-inner {
-                grid-template-columns: 1fr 1fr;
-                gap: 30px 20px;
-            }
-
-            .footer-about {
-                grid-column: 1 / -1;
-            }
-
-            .footer-bottom {
                 flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
@@ -452,39 +351,26 @@
 
 <body>
 
+    <!-- TOPBAR -->
     <div class="topbar">
-        <p>Stories, opinions and the things people don't always say out loud.</p>
-
-        <div class="topbar-socials">
-            <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <i class="fab fa-instagram"></i>
-            </a>
-            <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <i class="fab fa-facebook-f"></i>
-            </a>
-            <a href="https://www.youtube.com/" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                <i class="fab fa-youtube"></i>
+        <div class="topbar-inner">
+            <p>Some things just need to be said.</p>
+            <a href="/" id="topHomeLink">
+                <i class="fas fa-arrow-left"></i> Back to home
             </a>
         </div>
     </div>
 
+    <!-- HEADER -->
     <header class="site-header">
         <div class="header-inner">
-            <div>
-                <a href="/" class="logo" id="logoLink">We Said<span> It</span>.</a>
-                <p class="header-tagline">Unfiltered stories. Real conversations.</p>
-            </div>
-
-            <div class="header-right">
-                <a href="/about/" id="aboutTopLink">About Us</a>
-                <a href="/articles/" id="articlesTopLink">All Stories</a>
-                <a href="/search/" class="header-search" id="searchTopLink" aria-label="Search">
-                    <i class="fas fa-search"></i>
-                </a>
-            </div>
+            <a href="/" class="brand" id="logoLink">
+                WE SAID<span> IT.</span>
+            </a>
         </div>
     </header>
 
+    <!-- NAVIGATION -->
     <nav class="main-nav">
         <div class="nav-inner" id="navigation">
             <a href="/">Home</a>
@@ -498,6 +384,7 @@
         </div>
     </nav>
 
+    <!-- MAIN CONTENT -->
     <main class="page-container">
 
         <div class="breadcrumb">
@@ -506,20 +393,20 @@
             <span>Terms of Use</span>
         </div>
 
-        <section class="page-hero">
-            <span class="page-label">Website Information</span>
+        <section class="page-heading">
+            <span class="eyebrow">Website Information</span>
             <h1>Terms of Use</h1>
             <p>
-                These terms explain the rules and conditions that apply when
-                you visit and use We Said It. Please read them before
-                browsing our website.
+                These terms explain the rules and conditions that apply
+                when you visit and use We Said It. Please read them
+                carefully before browsing our website.
             </p>
-            <div class="updated-date">
+            <div class="last-updated">
                 Last updated: November 20, 2026
             </div>
         </section>
 
-        <article class="policy-content">
+        <article class="terms-content">
 
             <h2>1. Introduction</h2>
 
@@ -533,8 +420,8 @@
 
             <p>
                 These Terms of Use govern your access to and use of
-                <strong>We Said It</strong>, including its pages, articles,
-                features and other website content.
+                We Said It, including its pages, articles, features
+                and other website content.
             </p>
 
             <p>
@@ -579,9 +466,9 @@
             <p>
                 Unless otherwise stated, the original text, articles,
                 written material, branding, logos, graphics, design
-                elements and other original content published on We Said It
-                belong to We Said It or are used with permission from
-                their respective rights holders.
+                elements and other original content published on
+                We Said It belong to We Said It or are used with
+                permission from their respective rights holders.
             </p>
 
             <p>
@@ -589,9 +476,7 @@
                 property and copyright laws.
             </p>
 
-            <p>
-                You may:
-            </p>
+            <p>You may:</p>
 
             <ul>
                 <li>Read and access articles for personal, non-commercial use.</li>
@@ -609,8 +494,8 @@
 
             <p>
                 Third-party names, trademarks, images and materials
-                appearing on the website remain the property of their
-                respective owners.
+                appearing on the website remain the property of
+                their respective owners.
             </p>
 
             <h2>5. Nature of Our Content</h2>
@@ -671,8 +556,8 @@
 
             <p>
                 Access to the website does not create an employment,
-                contributor, partnership or agency relationship between
-                you and We Said It.
+                contributor, partnership or agency relationship
+                between you and We Said It.
             </p>
 
             <h2>8. Third-Party Websites and Services</h2>
@@ -705,8 +590,8 @@
             <p>
                 If advertising or affiliate arrangements are introduced,
                 third-party providers may use technologies such as
-                cookies or similar tools in accordance with their own
-                policies and applicable requirements.
+                cookies or similar tools in accordance with their
+                own policies and applicable requirements.
             </p>
 
             <p>
@@ -717,8 +602,8 @@
             <p>
                 We are not responsible for products, services, offers
                 or claims made by third-party advertisers or merchants.
-                Any transaction you make with them is between you and
-                the relevant third party.
+                Any transaction you make with them is between you
+                and the relevant third party.
             </p>
 
             <h2>10. Privacy</h2>
@@ -726,13 +611,13 @@
             <p>
                 Your use of We Said It is also subject to our
                 <a href="/privacy/" id="privacyLink">Privacy Policy</a>,
-                which explains how information may be collected, used
-                and handled when you visit the website.
+                which explains how information may be collected,
+                used and handled when you visit the website.
             </p>
 
             <p>
-                Please read the Privacy Policy alongside these Terms
-                of Use.
+                Please read the Privacy Policy alongside these
+                Terms of Use.
             </p>
 
             <h2>11. Website Availability and Security</h2>
@@ -757,8 +642,8 @@
             <p>
                 You are responsible for using appropriate security
                 measures when accessing websites and the internet.
-                We do not guarantee that the website will always be
-                free from security vulnerabilities or harmful
+                We do not guarantee that the website will always
+                be free from security vulnerabilities or harmful
                 components.
             </p>
 
@@ -794,8 +679,8 @@
             <p>
                 This includes, where legally permissible, loss
                 resulting from reliance on website content, temporary
-                website interruptions, external websites or third-party
-                services.
+                website interruptions, external websites or
+                third-party services.
             </p>
 
             <p>
@@ -874,7 +759,7 @@
                 website, please use the contact details below.
             </p>
 
-            <div class="contact-card">
+            <div class="terms-contact">
                 <h2>Contact We Said It</h2>
                 <p>
                     Email:
@@ -882,45 +767,21 @@
                         YOUR-EMAIL@example.com
                     </a>
                 </p>
-                <p>
-                    Website:
-                    <a href="/" id="contactHomeLink">We Said It</a>
-                </p>
             </div>
 
         </article>
-
     </main>
 
+    <!-- FOOTER -->
     <footer class="site-footer">
         <div class="footer-inner">
+            <p>
+                © <span id="currentYear"></span> We Said It. All rights reserved.
+            </p>
 
-            <div class="footer-about">
-                <div class="footer-logo">We Said<span> It</span>.</div>
-                <p>
-                    Wild stories, unfiltered opinions and real conversations
-                    about the things people don't always say out loud.
-                </p>
-            </div>
-
-            <div class="footer-column">
-                <h3>Explore</h3>
-                <a href="/" id="footerHome">Home</a>
-                <a href="/articles/" id="footerArticles">All Stories</a>
-                <a href="/about/" id="footerAbout">About Us</a>
-            </div>
-
-            <div class="footer-column">
-                <h3>Information</h3>
-                <a href="/privacy/" id="footerPrivacy">Privacy Policy</a>
-                <a href="/terms/" id="footerTerms">Terms of Use</a>
-            </div>
-
-        </div>
-
-        <div class="footer-bottom">
-            <span>© <span id="currentYear"></span> We Said It. All rights reserved.</span>
-            <span>Stories worth talking about.</span>
+            <a href="/" id="footerHome">
+                Home
+            </a>
         </div>
     </footer>
 
@@ -933,8 +794,6 @@
             return SITE_BASE + String(path).replace(/^\/+/, "");
         }
 
-        // Update internal navigation links for GitHub Pages
-        // and the future custom domain.
         document.querySelectorAll('a[href^="/"]').forEach(link => {
             const href = link.getAttribute("href");
 
@@ -942,24 +801,6 @@
                 link.setAttribute("href", siteUrl(href));
             }
         });
-
-        // Set up the main navigation.
-        const navigation = document.getElementById("navigation");
-
-        const navItems = [
-            ["Home", ""],
-            ["All Stories", "articles/"],
-            ["Wild Things", "category/wild-things/"],
-            ["Let's Talk", "category/lets-talk/"],
-            ["Relationships", "category/relationships/"],
-            ["The Gossip", "category/gossip/"],
-            ["Human Behaviour", "category/human-behaviour/"],
-            ["Internet Culture", "category/internet-culture/"]
-        ];
-
-        navigation.innerHTML = navItems.map(([label, path]) =>
-            `<a href="${siteUrl(path)}">${label}</a>`
-        ).join("");
 
         document.getElementById("currentYear").textContent =
             new Date().getFullYear();
