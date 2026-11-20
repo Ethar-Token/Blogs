@@ -1,0 +1,1003 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Editorial Policy — We Said It</title>
+<meta name="description" content="Learn about the editorial standards behind We Said It, including our approach to accuracy, research, sourcing, editorial independence, AI assistance and corrections.">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#7655c7">
+<link rel="canonical" href="https://ethar-token.github.io/Blogs/editorial-policy/">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<style>
+:root {
+    --primary: #7655c7;
+    --primary-light: #9b7bea;
+    --primary-pale: #f3efff;
+    --background: #faf9fd;
+    --surface: #fff;
+    --text: #29243a;
+    --muted: #777386;
+    --border: #eeeaf4;
+    --dark: #191622;
+    --radius: 14px;
+    --shadow: 0 4px 20px rgba(35,25,60,.045);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.7;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.topbar {
+    background: var(--dark);
+    color: white;
+    padding: 8px 5%;
+    font-size: 12px;
+}
+
+.topbar-inner {
+    max-width: 1190px;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+}
+
+.topbar a {
+    color: #d6c9f6;
+}
+
+.site-header {
+    background: white;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-inner {
+    max-width: 1190px;
+    margin: auto;
+    padding: 17px 22px;
+}
+
+.logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 30px;
+    font-weight: 800;
+    letter-spacing: -1.5px;
+}
+
+.logo span {
+    color: var(--primary);
+}
+
+.main-nav {
+    border-top: 1px solid var(--border);
+}
+
+.nav-inner {
+    max-width: 1190px;
+    margin: auto;
+    padding: 0 22px;
+    display: flex;
+    gap: 28px;
+    overflow-x: auto;
+    scrollbar-width: none;
+}
+
+.nav-inner::-webkit-scrollbar {
+    display: none;
+}
+
+.nav-inner a {
+    padding: 13px 0;
+    white-space: nowrap;
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--muted);
+}
+
+.nav-inner a:hover,
+.nav-inner a.active {
+    color: var(--primary);
+}
+
+.container {
+    max-width: 1000px;
+    margin: auto;
+    padding: 40px 22px 65px;
+}
+
+.breadcrumb {
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 15px;
+}
+
+.breadcrumb a {
+    color: var(--primary);
+}
+
+.page-heading {
+    background: var(--dark);
+    color: white;
+    padding: 45px 40px;
+    border-radius: var(--radius);
+    margin-bottom: 30px;
+}
+
+.page-heading > span {
+    display: block;
+    color: #c6aaff;
+    font-size: 10px;
+    letter-spacing: 2px;
+    font-weight: 800;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.page-heading h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(32px, 5vw, 46px);
+    line-height: 1.2;
+    margin-bottom: 14px;
+}
+
+.page-heading p {
+    color: #d0cbd9;
+    font-size: 14px;
+    max-width: 680px;
+}
+
+.policy-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 30px 32px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+}
+
+.policy-card h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 23px;
+    line-height: 1.35;
+    margin-bottom: 14px;
+}
+
+.policy-card h3 {
+    font-size: 15px;
+    margin: 20px 0 8px;
+}
+
+.policy-card p {
+    color: #625e70;
+    font-size: 13px;
+    margin-bottom: 13px;
+}
+
+.policy-card p:last-child {
+    margin-bottom: 0;
+}
+
+.policy-card ul {
+    padding-left: 22px;
+    margin: 10px 0 15px;
+}
+
+.policy-card li {
+    color: #625e70;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
+
+.policy-card strong {
+    color: var(--text);
+}
+
+.policy-card a {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.policy-card a:hover {
+    text-decoration: underline;
+}
+
+.policy-note {
+    background: var(--primary-pale);
+    border: 1px solid #e9ddff;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 22px;
+}
+
+.policy-note p {
+    font-size: 12px;
+    margin: 0;
+}
+
+.last-updated {
+    color: var(--muted);
+    font-size: 11px;
+    margin-top: 10px;
+}
+
+.site-footer {
+    background: var(--dark);
+    color: white;
+    padding: 35px 22px;
+    text-align: center;
+}
+
+.site-footer p {
+    color: #aaa5b8;
+    font-size: 11px;
+}
+
+.site-footer a {
+    color: #c6aaff;
+    margin-left: 8px;
+}
+
+@media (max-width: 600px) {
+    .topbar {
+        padding: 8px 15px;
+    }
+
+    .header-inner {
+        padding: 14px 16px;
+    }
+
+    .logo {
+        font-size: 26px;
+    }
+
+    .nav-inner {
+        padding: 0 16px;
+        gap: 22px;
+    }
+
+    .container {
+        padding: 25px 15px 45px;
+    }
+
+    .page-heading {
+        padding: 30px 23px;
+    }
+
+    .policy-card {
+        padding: 23px 19px;
+    }
+
+    .policy-card h2 {
+        font-size: 21px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="topbar">
+    <div class="topbar-inner">
+        <span>Some things just need to be said.</span>
+        <a href="#" id="homeTopLink">
+            Back to home <i class="fas fa-arrow-right"></i>
+        </a>
+    </div>
+</div>
+
+<header class="site-header">
+
+    <div class="header-inner">
+        <a href="#" id="logoLink" class="logo">
+            WE SAID<span> IT.</span>
+        </a>
+    </div>
+
+    <nav class="main-nav">
+        <div class="nav-inner" id="navigation"></div>
+    </nav>
+
+</header>
+
+<main class="container">
+
+    <div class="breadcrumb">
+        <a href="#" id="breadcrumbHome">Home</a>
+        <span> / </span>
+        <span>Editorial Policy</span>
+    </div>
+
+    <section class="page-heading">
+        <span>OUR EDITORIAL STANDARDS</span>
+        <h1>Editorial Policy</h1>
+        <p>
+            Our editorial policy explains how we approach the
+            stories we publish, the standards we aim to uphold
+            and our responsibility to readers.
+        </p>
+        <div class="last-updated">
+            Last updated: November 20, 2026
+        </div>
+    </section>
+
+    <div class="policy-note">
+        <p>
+            <strong>Our commitment:</strong> We Said It aims to publish
+            engaging, thoughtful and responsible editorial content.
+            We value accuracy, transparency, originality, fairness
+            and respect for the people and subjects discussed in
+            our articles.
+        </p>
+    </div>
+
+    <section class="policy-card">
+        <h2>1. About Our Editorial Policy</h2>
+
+        <p>
+            This Editorial Policy explains the principles and
+            standards that guide the creation, review and
+            publication of content on We Said It.
+        </p>
+
+        <p>
+            We Said It is an independent editorial blog covering
+            subjects such as human behaviour, relationships,
+            dating, gossip, internet culture, unusual experiences,
+            social trends and opinions.
+        </p>
+
+        <p>
+            Our aim is to publish content that is interesting,
+            relevant and worth reading while treating information
+            and the people discussed in our articles responsibly.
+        </p>
+
+        <p>
+            This policy applies to the editorial content published
+            on our website and the processes involved in preparing
+            that content.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>2. Editorial Independence</h2>
+
+        <p>
+            Our editorial decisions are guided by the relevance
+            of a subject, its value to readers, the quality of
+            available information and our editorial judgement.
+        </p>
+
+        <p>
+            We aim to maintain independence in deciding what
+            to publish, how to approach a topic and what
+            conclusions or perspectives an article presents.
+        </p>
+
+        <p>
+            Advertisers, sponsors, commercial partners and
+            other outside parties do not automatically receive
+            the right to influence our editorial decisions.
+        </p>
+
+        <p>
+            Commercial relationships should not determine
+            the factual conclusions, opinions or editorial
+            positions expressed in our independent content.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>3. Accuracy and Fact-Checking</h2>
+
+        <p>
+            We aim to make our articles accurate and avoid
+            presenting unsupported claims as established facts.
+            The level of verification applied depends on the
+            nature and significance of the subject.
+        </p>
+
+        <p>
+            Where an article contains factual claims, we aim
+            to check relevant details before publication.
+            This may include:
+        </p>
+
+        <ul>
+            <li>Checking names, dates, figures and other specific details.</li>
+            <li>Consulting original documents and reliable sources where available.</li>
+            <li>Comparing information across sources when appropriate.</li>
+            <li>Checking quotations and their surrounding context.</li>
+            <li>Distinguishing confirmed information from claims that remain unverified.</li>
+            <li>Reviewing whether an article gives readers enough context to understand the subject.</li>
+        </ul>
+
+        <p>
+            We do not intend to publish fabricated facts,
+            invented quotations or deliberately misleading
+            information.
+        </p>
+
+        <p>
+            When reliable verification is not possible, we may
+            qualify a statement, explain the uncertainty or
+            decide not to include it.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>4. Sources and Attribution</h2>
+
+        <p>
+            We recognise the importance of giving credit to
+            original sources and allowing readers to understand
+            where information comes from.
+        </p>
+
+        <p>
+            Depending on the article, our sources may include:
+        </p>
+
+        <ul>
+            <li>Official statements and public records.</li>
+            <li>Research papers, studies and published reports.</li>
+            <li>Recognised publications and established media sources.</li>
+            <li>Expert commentary and relevant professional information.</li>
+            <li>Publicly available information from organisations and institutions.</li>
+            <li>First-hand accounts where their origin and limitations are made clear.</li>
+        </ul>
+
+        <p>
+            Where we rely on another publication, study, document
+            or source for material information, we aim to provide
+            appropriate attribution or a link where practical.
+        </p>
+
+        <p>
+            We do not intentionally misrepresent the identity,
+            authority or statements of a source.
+        </p>
+
+        <p>
+            Information found online is not automatically treated
+            as accurate simply because it has been published or
+            widely shared.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>5. Opinion, Commentary and Editorial Content</h2>
+
+        <p>
+            We Said It publishes content that may include
+            commentary, interpretation, observations and
+            opinion alongside factual information.
+        </p>
+
+        <p>
+            We believe readers should be able to distinguish
+            between a verifiable factual statement and an
+            interpretation or personal viewpoint.
+        </p>
+
+        <p>
+            Opinions may be direct, critical, humorous or
+            unconventional. However, presenting an opinion
+            does not give us a reason to knowingly misrepresent
+            facts or make unsupported accusations about
+            identifiable people.
+        </p>
+
+        <p>
+            Where a topic involves disputed information,
+            we aim to make that distinction clear and provide
+            appropriate context.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>6. Headlines, Titles and Descriptions</h2>
+
+        <p>
+            Headlines and article titles help readers understand
+            what a story is about and decide whether to read it.
+            We aim to make them clear, relevant and engaging.
+        </p>
+
+        <p>
+            We may use curiosity, strong wording, humour or
+            provocative framing where appropriate to the subject.
+            However, headlines should not deliberately create
+            an impression that the article itself does not support.
+        </p>
+
+        <p>
+            We aim to avoid:
+        </p>
+
+        <ul>
+            <li>Headlines that materially misrepresent an article.</li>
+            <li>False claims designed only to attract clicks.</li>
+            <li>Descriptions that remove important context.</li>
+            <li>Exaggerations that turn speculation into apparent fact.</li>
+        </ul>
+
+        <p>
+            Search descriptions, social media captions and
+            promotional material should also represent the
+            underlying article fairly.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>7. Fairness, Privacy and Respect</h2>
+
+        <p>
+            We aim to discuss people, groups and sensitive
+            subjects with appropriate care and respect.
+        </p>
+
+        <p>
+            When an article concerns an identifiable person
+            or organisation, we aim to avoid unnecessary
+            personal exposure, misleading representations
+            and unsupported allegations.
+        </p>
+
+        <p>
+            We consider the potential impact of publishing
+            personal details, particularly where the subject
+            involves children, vulnerable individuals,
+            private relationships or sensitive circumstances.
+        </p>
+
+        <p>
+            Where serious allegations are discussed, we aim
+            to seek relevant responses or include available
+            context where reasonably practicable.
+        </p>
+
+        <p>
+            We do not believe that public curiosity alone
+            justifies exposing someone's private information.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>8. Images, Videos and Other Media</h2>
+
+        <p>
+            Images and other media can help readers understand
+            an article, but they should not create a false
+            impression about the subject.
+        </p>
+
+        <p>
+            We aim to use media that is relevant to the article
+            and that we have the right or appropriate permission
+            to use.
+        </p>
+
+        <p>
+            Depending on the material, images may be:
+        </p>
+
+        <ul>
+            <li>Original photographs or graphics.</li>
+            <li>Licensed or otherwise permitted third-party images.</li>
+            <li>Illustrative or representative images.</li>
+            <li>Media embedded from external sources where permitted.</li>
+        </ul>
+
+        <p>
+            Illustrative images should not be presented in a
+            way that falsely suggests they depict an actual
+            person, event or situation.
+        </p>
+
+        <p>
+            We aim to respect copyright, attribution requirements
+            and the rights of people appearing in visual media.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>9. Use of Artificial Intelligence</h2>
+
+        <p>
+            Artificial intelligence tools may be used as
+            part of the editorial and content preparation
+            process where appropriate.
+        </p>
+
+        <p>
+            Such tools may assist with tasks including:
+        </p>
+
+        <ul>
+            <li>Brainstorming article ideas and possible angles.</li>
+            <li>Organising research and outlining content.</li>
+            <li>Grammar, spelling and language improvements.</li>
+            <li>Summarising material for further human review.</li>
+            <li>Formatting, editing and other production assistance.</li>
+        </ul>
+
+        <p>
+            AI-generated output is not automatically treated
+            as accurate or authoritative. Factual claims,
+            quotations, references and other important details
+            should be checked before publication.
+        </p>
+
+        <p>
+            AI tools do not replace editorial responsibility.
+            We remain responsible for the content we choose
+            to publish.
+        </p>
+
+        <p>
+            We do not intend to knowingly present fabricated
+            AI-generated events, quotations, sources or
+            evidence as genuine.
+        </p>
+
+        <p>
+            Where synthetic or substantially altered media
+            could mislead readers about what actually happened,
+            we aim to identify its illustrative or generated
+            nature.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>10. Originality and Copyright</h2>
+
+        <p>
+            We value original editorial work and respect
+            the intellectual property rights of other creators.
+        </p>
+
+        <p>
+            We do not intentionally copy another publication's
+            work and present it as our own.
+        </p>
+
+        <p>
+            When using information, quotations, images or
+            other material created by others, we aim to
+            provide appropriate attribution and respect
+            applicable copyright requirements.
+        </p>
+
+        <p>
+            Our articles may discuss, reference or link to
+            material published elsewhere. Such references
+            do not imply ownership of the original material.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>11. Advertising and Sponsored Content</h2>
+
+        <p>
+            We Said It may display advertising or participate
+            in commercial partnerships as part of operating
+            the website.
+        </p>
+
+        <p>
+            Advertising and independent editorial content
+            should remain distinguishable.
+        </p>
+
+        <p>
+            Where content is sponsored, paid for or produced
+            as part of a commercial arrangement, we aim to
+            identify that relationship clearly.
+        </p>
+
+        <p>
+            Advertisers and commercial partners should not
+            be able to purchase favourable conclusions or
+            control independent editorial decisions simply
+            by advertising on the website.
+        </p>
+
+        <p>
+            The presence of an advertisement does not mean
+            that We Said It independently recommends or
+            endorses the advertised product or service.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>12. Updates and Corrections</h2>
+
+        <p>
+            We recognise that mistakes can happen and that
+            information may change after an article is published.
+        </p>
+
+        <p>
+            We aim to review reported errors and make
+            appropriate corrections when necessary.
+        </p>
+
+        <h3>Corrections</h3>
+
+        <p>
+            When we identify a material factual error, we
+            aim to correct it as promptly as reasonably
+            possible.
+        </p>
+
+        <p>
+            Where a correction significantly changes the
+            meaning or understanding of an article, we may
+            include a note explaining what was corrected.
+        </p>
+
+        <h3>Clarifications</h3>
+
+        <p>
+            If wording is unclear or lacks important context,
+            we may revise the relevant section to make the
+            meaning more accurate or understandable.
+        </p>
+
+        <h3>Updates</h3>
+
+        <p>
+            Articles may be updated to include new information,
+            reflect developments or replace outdated details.
+            An update does not necessarily mean the original
+            article contained an error.
+        </p>
+
+        <p>
+            Minor spelling, punctuation, formatting and
+            broken-link fixes may be made without a separate
+            correction note where they do not change meaning.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>13. Removal Requests and Editorial Review</h2>
+
+        <p>
+            We may receive requests to amend, clarify or
+            remove published material.
+        </p>
+
+        <p>
+            Each request should be considered on its
+            individual circumstances.
+        </p>
+
+        <p>
+            We may consider:
+        </p>
+
+        <ul>
+            <li>Whether the information is factually inaccurate.</li>
+            <li>Whether the article creates a misleading impression.</li>
+            <li>Whether personal information has been exposed unnecessarily.</li>
+            <li>Whether there are legitimate privacy or safety concerns.</li>
+            <li>Whether a legal obligation applies.</li>
+            <li>Whether an update or correction would resolve the issue.</li>
+        </ul>
+
+        <p>
+            A disagreement with an article or an unfavourable
+            opinion does not automatically mean the material
+            must be removed.
+        </p>
+
+        <p>
+            We aim to assess requests fairly and respond
+            appropriately based on the information available.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>14. Reader Feedback and Complaints</h2>
+
+        <p>
+            We welcome constructive feedback about our
+            published content, including concerns about
+            factual accuracy, sourcing, context or fairness.
+        </p>
+
+        <p>
+            If you believe an article contains an error,
+            please contact us with:
+        </p>
+
+        <ul>
+            <li>The title or URL of the article.</li>
+            <li>The specific passage or detail you are concerned about.</li>
+            <li>An explanation of why you believe it is inaccurate or misleading.</li>
+            <li>Supporting information or reliable sources, where available.</li>
+        </ul>
+
+        <p>
+            Providing clear details helps us review a concern
+            more effectively.
+        </p>
+
+        <p>
+            We may request further information where necessary
+            to understand the issue.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>15. What We Do Not Intend to Do</h2>
+
+        <p>
+            Our editorial standards are intended to prevent
+            practices that undermine reader trust.
+        </p>
+
+        <p>
+            We do not knowingly intend to:
+        </p>
+
+        <ul>
+            <li>Fabricate facts, quotations, sources or events.</li>
+            <li>Present unverified allegations as established facts.</li>
+            <li>Deliberately mislead readers through headlines or descriptions.</li>
+            <li>Copy another creator's work and claim it as our own.</li>
+            <li>Present illustrative media as genuine evidence.</li>
+            <li>Conceal material commercial relationships in sponsored content.</li>
+            <li>Allow advertising relationships to dictate independent editorial conclusions.</li>
+            <li>Publish private or identifying information without appropriate consideration.</li>
+        </ul>
+    </section>
+
+    <section class="policy-card">
+        <h2>16. Changes to This Editorial Policy</h2>
+
+        <p>
+            We may update this Editorial Policy as our
+            website, editorial practices and publishing
+            standards develop.
+        </p>
+
+        <p>
+            Changes may also be made to reflect new
+            technologies, lessons learned from our
+            publishing processes or applicable requirements.
+        </p>
+
+        <p>
+            When this policy is updated, we will revise
+            the "Last updated" date at the top of this page.
+        </p>
+
+        <p>
+            We encourage readers to review this page
+            periodically.
+        </p>
+    </section>
+
+    <section class="policy-card">
+        <h2>17. Contact Us</h2>
+
+        <p>
+            If you have an editorial question, wish to report
+            a factual error, request a clarification or raise
+            a concern about an article, please contact us.
+        </p>
+
+        <p>
+            <strong>Website:</strong> We Said It
+        </p>
+
+        <p>
+            <strong>Website address:</strong>
+            <a href="https://ethar-token.github.io/Blogs/">
+                https://ethar-token.github.io/Blogs/
+            </a>
+        </p>
+
+        <p>
+            <strong>Email:</strong>
+            [Add your official contact email address]
+        </p>
+
+        <p>
+            When contacting us about a published article,
+            include its URL and explain the issue as clearly
+            as possible.
+        </p>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <p>
+        © <span id="currentYear"></span> We Said It.
+        All rights reserved.
+        <a href="#" id="footerHome">Home</a>
+    </p>
+</footer>
+
+<script>
+
+const SITE_BASE = window.location.hostname === "ethar-token.github.io"
+    ? "/Blogs/"
+    : "/";
+
+function siteUrl(path = "") {
+    return SITE_BASE + String(path).replace(/^\/+/, "");
+}
+
+
+/* HOME LINKS */
+
+["homeTopLink", "logoLink", "breadcrumbHome", "footerHome"].forEach(id => {
+    document.getElementById(id).href = siteUrl("");
+});
+
+
+/* NAVIGATION */
+
+const categories = [
+    { name: "Home", path: "" },
+    { name: "Wild Things", path: "category/wild-things/" },
+    { name: "Let's Talk", path: "category/lets-talk/" },
+    { name: "Relationships", path: "category/relationships/" },
+    { name: "The Gossip", path: "category/gossip/" },
+    { name: "Human Behaviour", path: "category/human-behaviour/" },
+    { name: "Internet Culture", path: "category/internet-culture/" },
+    { name: "Anonymous Stories", path: "category/anonymous-stories/" }
+];
+
+const navigation = document.getElementById("navigation");
+
+categories.forEach(category => {
+    const link = document.createElement("a");
+    link.href = siteUrl(category.path);
+    link.textContent = category.name;
+    navigation.appendChild(link);
+});
+
+const allStoriesLink = document.createElement("a");
+allStoriesLink.href = siteUrl("articles/");
+allStoriesLink.textContent = "All Stories";
+navigation.appendChild(allStoriesLink);
+
+
+/* FOOTER YEAR */
+
+document.getElementById("currentYear").textContent =
+    new Date().getFullYear();
+
+</script>
+
+</body>
+</html>
