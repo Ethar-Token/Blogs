@@ -464,7 +464,7 @@ img {
                 <a href="#" aria-label="X"><i class="fab fa-x-twitter"></i></a>
             </div>
 
-            <button class="search-btn" aria-label="Search">
+            <button class="search-btn" id="openSearch" aria-label="Search" aria-expanded="false">
                 <i class="fas fa-search"></i>
             </button>
 
@@ -488,6 +488,143 @@ img {
     </nav>
 
 </header>
+
+<!-- HOMEPAGE SEARCH -->
+<section class="homepage-search" id="homepageSearch" hidden>
+    <div class="homepage-search-inner">
+        <div class="homepage-search-input">
+            <i class="fas fa-search"></i>
+            <input
+                type="search"
+                id="articleSearchInput"
+                placeholder="Search stories, topics, opinions..."
+                autocomplete="off"
+                aria-label="Search all We Said It articles"
+            >
+            <button type="button" id="closeSearch" aria-label="Close search">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+
+        <div
+            class="search-results"
+            id="articleSearchResults"
+            aria-live="polite"
+        >
+            <p>Search all our stories by title, topic, tag or anything mentioned in an article.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+.homepage-search {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+    padding: 22px;
+}
+
+.homepage-search[hidden] {
+    display: none;
+}
+
+.homepage-search-inner {
+    max-width: 850px;
+    margin: auto;
+}
+
+.homepage-search-input {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    background: var(--background);
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    padding: 0 15px;
+}
+
+.homepage-search-input > i {
+    color: var(--primary);
+}
+
+.homepage-search-input input {
+    flex: 1;
+    min-width: 0;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    padding: 15px 0;
+    font: inherit;
+    font-size: 14px;
+    color: var(--text);
+}
+
+.homepage-search-input button {
+    background: transparent;
+    color: var(--muted);
+    padding: 8px;
+    font-size: 17px;
+}
+
+.homepage-search-input button:hover {
+    color: var(--primary);
+}
+
+.search-results {
+    margin-top: 13px;
+}
+
+.search-results > p {
+    color: var(--muted);
+    font-size: 12px;
+    padding: 12px 3px;
+}
+
+.search-result {
+    display: block;
+    padding: 15px 13px;
+    border-bottom: 1px solid var(--border);
+    border-radius: 7px;
+    transition: background .2s;
+}
+
+.search-result:hover {
+    background: var(--primary-pale);
+}
+
+.search-result h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    line-height: 1.4;
+    margin-bottom: 5px;
+    color: var(--text);
+}
+
+.search-result span {
+    display: block;
+    color: var(--primary);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: .7px;
+    margin-bottom: 5px;
+}
+
+.search-result p {
+    color: var(--muted);
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.search-result:hover h3 {
+    color: var(--primary);
+}
+
+@media (max-width: 600px) {
+    .homepage-search {
+        padding: 15px;
+    }
+}
+</style>
 
 <main class="container">
 
@@ -2027,6 +2164,200 @@ async function loadHomepageArticles() {
     }
 
 }
+
+/* HOMEPAGE SEARCH */
+
+const openSearchButton = document.getElementById("openSearch");
+const closeSearchButton = document.getElementById("closeSearch");
+const searchPanel = document.getElementById("homepageSearch");
+const searchInput = document.getElementById("articleSearchInput");
+const searchResults = document.getElementById("articleSearchResults");
+
+let searchIndex = [];
+let searchIndexLoaded = false;
+let searchIndexLoading = false;
+
+async function loadSearchIndex() {
+    if (searchIndexLoaded) return true;
+
+    if (searchIndexLoading) return false;
+
+    searchIndexLoading = true;
+
+    searchResults.innerHTML = "<p>Loading all published stories...</p>";
+
+    try {
+        const response = await fetch(
+            siteUrl("search-index.json") + "?t=" + Date.now(),
+            { cache: "no-store" }
+        );
+
+        if (!response.ok) {
+            throw new Error("Search index could not be loaded.");
+        }
+
+        const data = await response.json();
+
+        searchIndex = Array.isArray(data)
+            ? data
+            : Array.isArray(data.articles)
+                ? data.articles
+                : [];
+
+        searchIndexLoaded = true;
+        searchIndexLoading = false;
+
+        return true;
+
+    } catch (error) {
+        console.error("Search index error:", error);
+
+        searchIndexLoading = false;
+        searchResults.innerHTML =
+            "<p>Search is temporarily unavailable. Please try again shortly.</p>";
+
+        return false;
+    }
+}
+
+
+function openHomepageSearch() {
+    searchPanel.hidden = false;
+    openSearchButton.setAttribute("aria-expanded", "true");
+
+    searchInput.focus();
+
+    loadSearchIndex();
+}
+
+
+function closeHomepageSearch() {
+    searchPanel.hidden = true;
+    openSearchButton.setAttribute("aria-expanded", "false");
+    searchInput.value = "";
+    searchResults.innerHTML =
+        "<p>Search all our stories by title, topic, tag or anything mentioned in an article.</p>";
+}
+
+
+function renderSearchResults(query) {
+    const words = query
+        .toLowerCase()
+        .trim()
+        .split(/\s+/)
+        .filter(Boolean);
+
+    searchResults.replaceChildren();
+
+    if (!words.length) {
+        const message = document.createElement("p");
+        message.textContent =
+            "Search by article title, topic, tag or anything mentioned in an article.";
+
+        searchResults.appendChild(message);
+        return;
+    }
+
+    const matches = searchIndex
+        .map(article => {
+            const searchableText = [
+                article.title,
+                article.description,
+                article.category,
+                ...(Array.isArray(article.tags) ? article.tags : []),
+                article.content
+            ].join(" ").toLowerCase();
+
+            const matchingWords = words.filter(word =>
+                searchableText.includes(word)
+            ).length;
+
+            return {
+                article,
+                matchingWords
+            };
+        })
+        .filter(result => result.matchingWords === words.length)
+        .sort((a, b) => {
+            const aTitle = (a.article.title || "").toLowerCase();
+            const bTitle = (b.article.title || "").toLowerCase();
+
+            const aExact = words.every(word => aTitle.includes(word));
+            const bExact = words.every(word => bTitle.includes(word));
+
+            if (aExact !== bExact) return bExact - aExact;
+
+            return new Date(b.article.publishedAt || 0) -
+                   new Date(a.article.publishedAt || 0);
+        });
+
+    if (!matches.length) {
+        const message = document.createElement("p");
+        message.textContent =
+            "No matching stories found. Try different words or a broader search.";
+
+        searchResults.appendChild(message);
+        return;
+    }
+
+    const heading = document.createElement("p");
+    heading.textContent =
+        `${matches.length} matching ${matches.length === 1 ? "story" : "stories"} found`;
+
+    searchResults.appendChild(heading);
+
+    matches.forEach(({ article }) => {
+        const link = document.createElement("a");
+        link.className = "search-result";
+        link.href = getArticleUrl(article);
+
+        const category = document.createElement("span");
+        category.textContent = article.category || "Article";
+
+        const title = document.createElement("h3");
+        title.textContent = article.title || "Untitled article";
+
+        const description = document.createElement("p");
+        description.textContent =
+            article.description || "Read this story on We Said It.";
+
+        link.appendChild(category);
+        link.appendChild(title);
+        link.appendChild(description);
+
+        searchResults.appendChild(link);
+    });
+}
+
+
+openSearchButton.addEventListener("click", openHomepageSearch);
+
+closeSearchButton.addEventListener("click", closeHomepageSearch);
+
+searchInput.addEventListener("input", () => {
+    const query = searchInput.value.trim();
+
+    if (!query) {
+        renderSearchResults("");
+        return;
+    }
+
+    if (searchIndexLoaded) {
+        renderSearchResults(query);
+    } else {
+        loadSearchIndex().then(success => {
+            if (success && searchInput.value.trim()) {
+                renderSearchResults(searchInput.value);
+            }
+        });
+    }
+});
+
+searchInput.addEventListener("keydown", event => {
+    if (event.key === "Escape") {
+        closeHomepageSearch();
+    }
+});
 
 loadHomepageArticles();
 
